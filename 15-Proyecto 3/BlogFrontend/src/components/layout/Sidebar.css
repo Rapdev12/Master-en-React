@@ -1,0 +1,63 @@
+/* ======================================================
+   SIDEBAR (COLUMNA IZQUIERDA) - ESTILO GACETA CLÁSICA
+   ====================================================== */
+/* 1. Contenedor principal de la barra lateral (<aside>) */
+.sidebar {
+  width: 260px;                       /* Ancho fijo para la columna lateral */
+  min-height: 80vh;                   /* Altura mínima para que acompañe el contenido */
+  background-color: #fbf8f1;          /* Fondo tono pergamino */
+  border-right: 2px solid #1a1a1a;    /* Línea vertical divisoria a la derecha */
+  padding: 25px 20px;                 /* Espacio interior */
+  font-family: "Georgia", "Times New Roman", serif;
+  box-sizing: border-box;             /* Asegura que el padding no desborde el ancho */
+}
+/* 2. Título de la sección del Sidebar (<h3>) */
+.sidebar-title {
+  font-size: 1.1rem;                  /* Tamaño moderado pero con presencia */
+  text-transform: uppercase;          /* En mayúsculas */
+  letter-spacing: 1.5px;              /* Espaciado entre letras */
+  color: #1a1a1a;                     /* Tinta negra carbón */
+  margin: 0 0 15px 0;                 /* Solo margen inferior */
+  padding-bottom: 6px;                /* Espacio antes de la línea */
+  border-bottom: 2px double #1a1a1a;  /* Borde doble clásico bajo el título */
+  text-align: left;                   /* Alineado a la izquierda */
+}
+/* 3. Contenedor del formulario de búsqueda (<div>) */
+.search-box {
+  display: flex;                      /* Flexbox para organizar el input y el botón */
+  flex-direction: column;             /* Coloca el botón DEBAJO del input */
+  gap: 10px;                          /* Separación limpia entre el input y el botón */
+}
+/* 4. Campo de texto (<input>) */
+.search-input {
+  padding: 10px 12px;                 /* Espacio interno para que el texto respire */
+  font-family: "Georgia", serif;      /* Misma tipografía clásica */
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  background-color: #ffffff;          /* Fondo blanco puro para facilitar la lectura */
+  border: 1px solid #1a1a1a;         /* Borde negro fino y clásico */
+  outline: none;                      /* Quita el borde azul por defecto del navegador */
+}
+/* Efecto cuando el usuario hace clic para escribir en el input */
+.search-input:focus {
+  border: 1px solid #4a1525;          /* Borde fino en vino tinto cuando está activo */
+  background-color: #fffdfa;          /* Tono sutilmente cálido */
+}
+/* 5. Botón de búsqueda (<button>) */
+.search-button {
+  padding: 9px 15px;                  /* Altura y anchura cómoda */
+  font-family: "Georgia", serif;
+  font-size: 0.85rem;
+  font-weight: bold;                  /* Texto en negrita */
+  text-transform: uppercase;          /* En mayúsculas */
+  letter-spacing: 1px;                /* Separación entre letras */
+  color: #fbf8f1;                     /* Texto crema */
+  background-color: #1a1a1a;          /* Fondo negro (estilo bloque de imprenta) */
+  border: 1px solid #1a1a1a;
+  cursor: pointer;                    /* Muestra la "manito" al pasar el cursor */
+}
+/* Efecto al pasar el cursor sobre el botón (:hover) */
+.search-button:hover {
+  background-color: #4a1525;          /* Cambia a color vino tinto clásico */
+  border-color: #4a1525;
+}

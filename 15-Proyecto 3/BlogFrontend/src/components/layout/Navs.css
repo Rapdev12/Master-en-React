@@ -1,0 +1,43 @@
+/* ======================================================
+   BARRA DE NAVEGACIÓN - ESTILO GACETA CLÁSICA
+   ====================================================== */
+/* 1. Contenedor del menú (<nav>) */
+.navbar {
+  background-color: #fbf8f1;          /* Mismo fondo pergamino que el header */
+  border-bottom: 2px solid #1a1a1a;   /* Línea inferior que separa el menú del contenido */
+  padding: 10px 0;                    /* Espacio vertical arriba y abajo */
+  font-family: "Georgia", "Times New Roman", serif;
+}
+/* 2. Lista de enlaces (<ul>) */
+.nav-list {
+  display: flex;                      /* Flexbox: coloca los <li> en una sola fila */
+  justify-content: center;           /* Centra los enlaces horizontalmente */
+  align-items: center;               /* Alinea verticalmente */
+  gap: 30px;                         /* Espacio uniforme entre cada sección */
+  list-style: none;                  /* Quita las viñetas/puntos por defecto de la lista */
+  margin: 0;                          /* Quita márgenes por defecto del <ul> */
+  padding: 0;                         /* Quita rellenos por defecto del <ul> */
+  flex-wrap: wrap;                   /* Si la pantalla es chica, baja los enlaces de línea */
+}
+/* 3. Estilo de los enlaces (<NavLink>) */
+.nav-link {
+  text-decoration: none;             /* Quita el subrayado azul estándar */
+  color: #1a1a1a;                    /* Tinta negra sobria */
+  font-size: 0.95rem;                /* Tamaño de letra equilibrado */
+  font-weight: bold;                 /* Negrita */
+  text-transform: uppercase;          /* En mayúsculas estilo prensa */
+  letter-spacing: 1.5px;             /* Separación elegante entre letras */
+  padding: 6px 12px;                 /* Área de clic cómoda para el usuario */
+  border: 1px solid transparent;     /* Borde invisible base para que no salte al hacer hover */
+}
+/* 4. Efecto al pasar el cursor por encima (:hover) */
+.nav-link:hover {
+  color: #4a1525;                    /* Cambia a tono vino tinto */
+  border-bottom: 1px solid #4a1525;  /* Dibuja un elegante subrayado fino en vino tinto */
+}
+/* 5. Enlace de la página activa (.active puesto por React Router) */
+.nav-link.active {
+  background-color: #1a1a1a;         /* Fondo negro carbón */
+  color: #fbf8f1;                    /* Letras color crema (efecto invertido clásico) */
+  border: 1px solid #1a1a1a;         /* Enmarca el enlace activo como un sello */
+}

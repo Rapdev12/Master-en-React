@@ -1,0 +1,38 @@
+/* ======================================================
+   FOOTER CON CONTRASTE COMPLETO - ESTILO COLOFÓN DE IMPRENTA
+   ====================================================== */
+.footer {
+  width: 100%;
+  /* 1. CONTRASTE FUERTE: Fondo en tinta negra carbón */
+  background-color: #1a1a1a;          
+  
+  /* 2. TEXTO EN CONTRASTE: Letras color crema pergamino */
+  color: #fbf8f1;                     
+  
+  /* 3. BORDE CLÁSICO: Línea superior con detalle sutil */
+  border-top: 3px double #d8cfc0;     /* Doble línea clara que resalta sobre el negro */
+  
+  /* 4. SOMBRA ELEVADORA: Sombra hacia arriba que separa el contenido del footer */
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+  
+  padding: 30px 20px;
+  text-align: center;
+  font-family: "Georgia", "Times New Roman", serif;
+  box-sizing: border-box;
+  margin-top: auto;
+}
+/* Texto del copyright */
+.footer-text {
+  font-size: 0.85rem;
+  text-transform: uppercase;          /* En mayúsculas */
+  letter-spacing: 2px;               /* Letras bien separadas */
+  margin: 0 0 6px 0;
+  opacity: 0.95;
+}
+/* Detalle secundario opcional (subtítulo o lema del footer) */
+.footer-subtext {
+  font-size: 0.75rem;
+  font-style: italic;                /* Cursiva clásica */
+  color: #c4b9a8;                    /* Tono pergamino envejecido suave */
+  letter-spacing: 1px;
+}

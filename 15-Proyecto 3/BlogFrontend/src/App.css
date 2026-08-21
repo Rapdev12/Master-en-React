@@ -1,0 +1,12 @@
+/* ======================================================
+   ESTRUCTURA GENERAL DE LA APLICACIÓN
+   ====================================================== */
+.app-container {
+  background-color: #fbf8f1;          /* Fondo pergamino para toda la web */
+  min-height: 100vh;
+}
+/* Este es el truco: Pone el Sidebar y las Tarjetas lado a lado */
+.app-body {
+  display: flex;                      /* ¡Coloca el Sidebar a la izquierda y el contenido a la derecha! */
+  align-items: stretch;               /* Hace que el sidebar acompañe la altura del contenido */
+}

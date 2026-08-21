@@ -1,0 +1,38 @@
+Plaintext
+=====================================================
+    NOTAS DE MEMORIZACIÓN Y RENDIMIENTO EN REACT
+=====================================================
+
+1. React.memo (Componentes)
+-----------------------------------------------------
+- Qué hace: Enuelve un COMPONENTE entero.
+- Propósito: Evita que un componente hijo se vuelva a renderizar si sus props no cambiaron.
+- Ejemplo: Envolver el componente <TaskItem /> para que no se re-renderice al escribir en el formulario del padre.
+
+
+2. useMemo (Valores / Cálculos)
+-----------------------------------------------------
+- Qué hace: Guarda el RESULTADO de una función o cálculo.
+- Propósito: Evita ejecutar bucles pesados o procesamientos lentos si sus dependencias no cambiaron.
+- Ejemplo: Guardar el resultado de filtrar una lista de miles de productos.
+
+
+3. useCallback (Funciones)
+-----------------------------------------------------
+- Qué hace: Guarda la INSTANCIA de una función en memoria.
+- Propósito: Mantiene la misma referencia de la función entre re-renderizados para que React no la cree desde cero.
+- Ejemplo: Pasar una función desde el Padre a un Hijo que usa React.memo.
+
+
+=====================================================
+                 Tener en cuenta Siempre
+=====================================================
+
+* La Pareja Inseparable:
+  Para frenar re-renderizados en un hijo, DEBEN usarse juntos:
+  -> useCallback en la función del Padre.
+  -> React.memo en el componente Hijo.
+
+* Ojo con la sobre-optimización:
+  No memorices todo por defecto. Guardar en memoria consume recursos;
+  solo se aplica cuando hay problemas reales de rendimiento o procesos pesados.

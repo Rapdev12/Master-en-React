@@ -1,0 +1,36 @@
+/* ======================================================
+   ESTILOS PARA EL HEADER DE "OPUS CLASSIC"
+   ====================================================== */
+/* 1. Contenedor principal (<header>) */
+.header {
+  background-color: #fbf8f1;          /* Fondo color papel antiguo / pergamino */
+  color: #1a1a1a;                     /* Texto en tinta negra */
+  font-family: "Georgia", "Times New Roman", serif; /* Fuente con serifas */
+  border-top: 4px solid #1a1a1a;     /* Borde grueso superior */
+  border-bottom: 4px double #1a1a1a;  /* Borde doble característico de periódico */
+  padding: 25px 20px;                 /* Espaciado interior */
+  text-align: center;                 /* Asegura que el texto esté centrado */
+}
+/* 2. Contenedor que centra la imagen */
+.logo-wrapper {
+  display: flex;                      /* Flexbox para alinear elementos fácilmente */
+  justify-content: center;           /* Centra la imagen horizontalmente */
+  align-items: center;               /* Centra verticalmente */
+  margin-bottom: 10px;                /* Espacio entre la clave de sol y el título */
+}
+/* 3. La imagen de la Clave de Sol */
+.header-logo {
+  width: 45px;                        /* Ancho controlado del logo */
+  height: auto;                       /* Mantiene la proporción original para no deformarse */
+  display: block;                     /* Elimina pequeños espacios extra bajo las imágenes */
+  opacity: 0.85;                      /* Suaviza el negro para que parezca tinta sobre papel */
+}
+/* 4. Título principal centrado */
+.header-title {
+  font-size: 3.2rem;                  /* Tamaño grande para "Opus Classic" */
+  font-weight: bold;                  /* Negrita */
+  letter-spacing: 2px;               /* Separación elegante entre letras */
+  text-transform: uppercase;          /* En mayúsculas estilo titular */
+  margin: 0;                          /* Quita el margen por defecto */
+  line-height: 1.1;                   /* Altura de línea compacta */
+}
