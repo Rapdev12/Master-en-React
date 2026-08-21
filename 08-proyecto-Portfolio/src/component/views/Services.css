@@ -1,0 +1,144 @@
+/* SERVICES PAGE */
+
+.services-page {
+  width: 85%;
+  margin: 0 auto;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  color: #18181b;
+}
+
+.services-page > h1 {
+  margin: 0 0 20px;
+  font-size: 38px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: #37373a;              /* gris oscuro (ni negro ni violeta) */
+  text-shadow: 0 2px 6px rgba(24, 24, 27, 0.08);
+}
+
+.services-page > h1::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  margin: 12px auto 0;
+  background-color: #6d28d9;   /* la raya sigue en violeta para el acento */
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(109, 40, 217, 0.35);
+}
+
+.services-page > h1 strong {
+  color: #6d28d9;
+}
+
+
+/* SERVICES GRID
+   Como en Homepage: las cards se reparten en columnas
+   y se reacomodan solas según el ancho */
+
+.services-page > .section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 40px;                 /* separación cómoda entre tarjetas */
+  margin-top: 40px;
+}
+
+
+/* SERVICE CARD */
+
+.service {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: #ffffff;
+  border: 1px solid #e9d5ff;
+  border-radius: 15px;
+  box-shadow: 0 4px 14px rgba(109, 40, 217, 0.10);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* elevación al hover: la tarjeta "respira" */
+.service:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(109, 40, 217, 0.18);
+}
+
+.service h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  color: #6d28d9;             /* título de cada servicio en violeta */
+}
+
+.service p {
+  margin: 0;
+  color: #52525b;
+  line-height: 1.7;
+}
+
+/* CONTACT LINK - aparece al hacer hover en la tarjeta */
+
+.service {
+  display: flex;
+  flex-direction: column;   /* para empujar el botón al fondo */
+}
+
+.service-contact {
+  align-self: flex-end;              /* pega a la derecha */
+  margin-top: auto;                  /* empuja hacia abajo el botón */
+  padding: 8px 16px;
+  border: none;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: #6d28d9;
+  background-color: #faf7ff;         /* fondo lavanda = discreto */
+  border: 1px solid #e9d5ff;
+  border-radius: 999px;              /* forma de píldora (capsule) */
+
+  /* oculto por defecto */
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.service:hover .service-contact {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* al hover del propio botón: se rellena de violeta */
+.service-contact:hover {
+  background-color: #6d28d9;
+  color: #ffffff;
+}
+
+/* MOBILE VERSION */
+
+@media (max-width: 768px) {
+  .services-page {
+    width: 90%;
+  }
+
+  .services-page > h1 {
+    font-size: 32px;
+  }
+
+  .services-page .section-grid {
+    grid-template-columns: 1fr;   /* cards apiladas en una columna */
+  }
+
+  .service {
+    width: 100%;
+  }
+
+  /* en móvil el botón de contacto siempre se ve */
+  .service-contact {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}

@@ -1,0 +1,192 @@
+/* RESUME CV PAGE */
+
+.resume-page {
+  width: 60%;
+  margin: 0 auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  color: #18181b;
+}
+
+
+/* RESUME HEADER */
+
+.resume-page header {
+  text-align: center;
+  padding-bottom: 30px;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #e9d5ff;
+}
+
+.resume-page header h1 {
+  margin: 0;
+  font-size: 40px;
+  letter-spacing: 1px;
+}
+
+.resume-page header p {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #52525b;
+}
+
+.resume-page header p:first-of-type {
+  font-weight: 700;
+  color: #6d28d9;   /* acento violeta en el cargo */
+}
+
+
+/* RESUME SECTIONS */
+
+.resume-page section {
+  margin-bottom: 40px;
+}
+
+.resume-page section h2 {
+  margin: 0;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #6d28d9;            /* títulos de sección en violeta */
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e9d5ff;
+}
+
+.resume-page section > p {
+  margin-top: 14px;
+  color: #3f3f46;
+  line-height: 1.7;
+}
+
+
+/* CORE SKILLS -> chips (píldoras) */
+
+.resume-page .skills ul li {
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resume-page .skills ul li:hover {
+  background-color: #6d28d9;
+  color: #ffffff;
+  border-color: #6d28d9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(109, 40, 217, 0.25);
+}
+
+.resume-page section ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.resume-page section ul li {
+  background-color: #ffffff;
+  border: 1px solid #e9d5ff;
+  border-radius: 999px;       /* bordes muy redondeados = chip */
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #18181b;
+  box-shadow: 0 2px 6px rgba(109, 40, 217, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resume-page section ul li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(109, 40, 217, 0.15);
+}
+
+
+
+/* RELEVANT EXPERIENCE -> cada trabajo en una card */
+
+.resume-page article {
+  margin-top: 20px;
+  padding: 25px;
+  background-color: #ffffff;
+  border: 1px solid #e9d5ff;
+  border-radius: 15px;
+  box-shadow: 0 4px 14px rgba(109, 40, 217, 0.10);
+}
+
+.resume-page article h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.resume-page article > p {
+  margin-top: 6px;
+  color: #52525b;
+  font-size: 15px;
+}
+
+.resume-page article > p strong {
+  color: #6d28d9;
+}
+
+.resume-page article ul {
+  list-style: none;
+  margin-top: 14px;
+  display: block;
+  color: #3f3f46;
+  line-height: 1.7;
+}
+
+.resume-page article ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+}
+
+/* pequeño gráfico violeta como viñeta */
+.resume-page article ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #6d28d9;
+}
+
+
+/* EDUCATION & TRAINING
+   Los <strong> se pintan violeta para resaltar el título del curso */
+
+.resume-page section ul li {
+  border-radius: 10px;   /* en educación los chips son rmedi-cuadrados */
+}
+
+.resume-page section ul li strong {
+  color: #6d28d9;
+}
+
+
+/* ADDITIONAL INFORMATION */
+
+.resume-page section p {
+  color: #3f3f46;
+  line-height: 1.7;
+}
+
+.resume-page section p strong {
+  color: #6d28d9;
+}
+
+
+/* MOBILE VERSION */
+
+@media (max-width: 768px) {
+  .resume-page {
+    width: 90%;
+  }
+
+  .resume-page header h1 {
+    font-size: 30px;
+  }
+}

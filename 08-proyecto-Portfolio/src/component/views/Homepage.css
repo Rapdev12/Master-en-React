@@ -1,0 +1,161 @@
+/* HOMEPAGE PAGE */
+
+.homepage-page {
+  width: 85%;
+  margin: 0 auto;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  color: #18181b;
+}
+
+
+/* HOMEPAGE INTRO */
+
+.homepage-page h1 {
+  margin: 0;
+  font-size: 44px;
+  max-width: 720px;
+  line-height: 1.15;
+}
+
+/* La palabra en negrita del titular se pinta violeta:
+   rompe la monotonía y genera foco inmediato */
+.homepage-page h1 strong {
+  color: #6d28d9;
+}
+
+.homepage-page > p {
+  width: 70%;
+  margin-top: 20px;
+  color: #52525b;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.homepage-page > p a {
+  color: #6d28d9;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.homepage-page > p a:hover {
+  color: #4c1d95;
+}
+
+
+/* LATEST PROJECTS SECTION */
+
+.latest-work {
+  margin-top: 70px;
+}
+
+.latest-work h2 {
+  margin: 0;
+  font-size: 28px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e9d5ff;
+}
+
+.latest-work > p {
+  max-width: 600px;
+  margin-top: 10px;
+  color: #52525b;
+  line-height: 1.6;
+}
+
+
+/* PROJECT CARD
+   La sombra es la clave anti-plano:
+   simula una "lámina" flotando sobre el fondo lavanda */
+
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 60px;
+  margin-top: 25px;
+}
+
+.project-card {
+  width: 100%;
+  padding: 25px;
+  background-color: #ffffff;
+  border: 1px solid #e9d5ff;
+  border-radius: 15px;
+  box-shadow: 0 4px 14px rgba(109, 40, 217, 0.10);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(109, 40, 217, 0.18);
+}
+
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.project-card h3 {
+  margin-top: 18px;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.project-card p {
+  color: #52525b;
+  line-height: 1.6;
+}
+
+.project-card strong {
+  color: #3f3f46;
+}
+
+.project-card a {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 13px 22px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #7c3aed, #6d28d9);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(109, 40, 217, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.project-card a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(109, 40, 217, 0.35);
+}
+
+
+/* MOBILE VERSION */
+@media (max-width: 768px) {
+  .homepage-page {
+    width: 90%;
+  }
+
+  .homepage-page h1 {
+    font-size: 32px;
+  }
+
+  .homepage-page > p {
+    width: 100%;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;   /* 1 columna en móvil */
+  }
+
+  .project-card {
+    width: 100%;
+  }
+}
