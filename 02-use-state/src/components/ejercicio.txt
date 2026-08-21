@@ -1,0 +1,16 @@
+1. Crear un Componente {Resuelto}
+
+2. Recibir una prop con el año {Resuelto}
+
+3. Ojo, usar funciones para sacar el año {Resuelto}
+
+4. Usar estados y eventos para tener dos(2) botones {Resuelto}
+
+    -Pasar el proximo año
+    -Ir al año anterio
+    -Mostrar en todo momento el año por pantalla
+
+5. Validar el año sea un numero y que sea requerido (prop) {Resuelto}
+
+6. Cambiar el año mediante un input de texto y que se cambie
+dinamicamente.                                                {Resuelto}
