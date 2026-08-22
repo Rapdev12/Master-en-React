@@ -1,31 +1,54 @@
+import './CreateArticles.css';
 
 
 function CreateArticles() {
   return (
-    <div>
-      <h2>Crear Nuevo Artículo</h2>
+    <section className="create-container">
+      {/* Título de la sección */}
+      <h2 className="create-title">Redacción de Crónica Musical</h2>
       
-      <form>
-        <div>
-          <label htmlFor="title">Título</label>
-          <input type="text" id="title" placeholder="Título del artículo..." />
+      {/* Formulario */}
+      <form className="create-form">
+        {/* Campo de Título */}
+        <div className="form-group">
+          <label htmlFor="title" className="form-label">Título de la Obra o Artículo</label>
+          <input 
+            type="text" 
+            id="title" 
+            placeholder="Ej: Análisis del Concierto de Aranjuez..." 
+            className="form-input"
+          />
         </div>
 
-        <div>
-          <label htmlFor="content">Contenido</label>
-          <textarea id="content" placeholder="Escribe el contenido aquí..."></textarea>
+        {/* Campo de Contenido */}
+        <div className="form-group">
+          <label htmlFor="content" className="form-label">Cuerpo de la Crónica</label>
+          <textarea 
+            id="content" 
+            placeholder="Escribe aquí el análisis, contexto histórico o partitura..." 
+            className="form-textarea"
+          ></textarea>
         </div>
 
-        <div>
-          <label htmlFor="file">Imagen del Artículo</label>
-          <input type="file" id="file" />
+        {/* Campo de Imagen */}
+        <div className="form-group">
+          <label htmlFor="file" className="form-label">Grabado o Imagen Ilustrativa</label>
+          <input 
+            type="file" 
+            id="file" 
+            className="form-file"
+          />
         </div>
 
-        <button type="submit">Save Article</button>
+        {/* Botón de Publicar */}
+        <div className="form-actions">
+          <button type="submit" className="btn-submit">
+            Publicar en la Gaceta
+          </button>
+        </div>
       </form>
-    </div>
+    </section>
   );
-  
 }
 
-export default CreateArticles
+export default CreateArticles;

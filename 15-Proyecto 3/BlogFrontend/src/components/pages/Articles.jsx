@@ -1,26 +1,69 @@
-
+import './Articles.css';
 
 function Articles() {
   return (
-    <article>
-      <div>
-        {/* Aquí irá la imagen del artículo más adelante */}
-        <img src="https://via.placeholder.dumps/300x180" alt="Imagen del artículo" />
+    <section className="articles-container">
+      {/* Cabecera de la sección */}
+      <div className="articles-header">
+        <h2 className="articles-title">Hemeroteca de Crónicas</h2>
+        <p className="articles-subtitle">Catálogo general de publicaciones y gestión editorial</p>
       </div>
-      <div>
-        <span>Categoría • Fecha</span>
-        <h2>Título del Artículo Clásico</h2>
-        <p>
-          Este es un extracto breve del artículo donde se analiza la obra,
-          el compositor o la época musical correspondiente. Ideal para captar
-          la atención del lector antes de ver el texto completo.
-        </p>
-        <div>
-          <button>Leer más</button>
-        </div>
+
+      {/* Lista de artículos en formato de filas de gaceta */}
+      <div className="articles-list">
+        
+        {/* FILA DE ARTÍCULO 1 */}
+        <article className="article-row">
+          <div className="article-row-content">
+            <span className="article-row-tag">Crítica • 20 Ago, 2026</span>
+            <h3 className="article-row-title">La Quinta Sinfonía de Beethoven</h3>
+            <p className="article-row-excerpt">
+              Análisis estructural sobre el motivo del destino y la instrumentación orquestal...
+            </p>
+          </div>
+
+          <div className="article-row-actions">
+            <button type="button" className="btn-manage btn-edit">Editar</button>
+            <button type="button" className="btn-manage btn-delete">Eliminar</button>
+          </div>
+        </article>
+
+        {/* FILA DE ARTÍCULO 2 */}
+        <article className="article-row">
+          <div className="article-row-content">
+            <span className="article-row-tag">Análisis • 18 Ago, 2026</span>
+            <h3 className="article-row-title">Sonata Claro de Luna (Opus 27 N.º 2)</h3>
+            <p className="article-row-excerpt">
+              El lenguaje romántico temprano y la atmósfera poética de Ludwig van Beethoven...
+            </p>
+          </div>
+
+          <div className="article-row-actions">
+            <button type="button" className="btn-manage btn-edit">Editar</button>
+            <button type="button" className="btn-manage btn-delete">Eliminar</button>
+          </div>
+        </article>
+
+        {/* FILA DE ARTÍCULO 3 */}
+        <article className="article-row">
+          <div className="article-row-content">
+            <span className="article-row-tag">Barroco • 15 Ago, 2026</span>
+            <h3 className="article-row-title">Las Cuatro Estaciones de Vivaldi</h3>
+            <p className="article-row-excerpt">
+              Innovaciones del violín barroco y el programa descriptivo en la Venecia del siglo XVIII...
+            </p>
+          </div>
+
+          <div className="article-row-actions">
+            <button type="button" className="btn-manage btn-edit">Editar</button>
+            <button type="button" className="btn-manage btn-delete">Eliminar</button>
+          </div>
+        </article>
+
       </div>
-    </article>
-  )
+    </section>
+  );
 }
 
-export default Articles
+export default Articles;
+

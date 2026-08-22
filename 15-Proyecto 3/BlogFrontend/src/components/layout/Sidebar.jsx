@@ -4,16 +4,16 @@ function Sidebar() {
   return (
     <aside className="sidebar">
       {/* Título de la sección */}
-      <h3 className="sidebar-title">Búsqueda</h3>
+      <h3 className="sidebar-title">Search</h3>
       {/* Caja del buscador */}
       <div className="search-box">
         <input 
           type="text" 
-          placeholder="Buscar obra, autor..." 
+          placeholder="Search for a work, author..." 
           className="search-input" 
         />
         <button type="button" className="search-button">
-          Buscar
+          Search
         </button>
       </div>
     </aside>

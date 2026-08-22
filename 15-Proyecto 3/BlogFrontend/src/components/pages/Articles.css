@@ -1,0 +1,146 @@
+/* ======================================================
+   ARTÍCULOS - FILAS CON EFECTO DE PAPEL DE PARTITURA
+   ====================================================== */
+
+/* 1. Contenedor principal */
+.articles-container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+/* 2. Cabecera de la sección */
+.articles-header {
+  text-align: center;
+  margin-bottom: 40px;
+  border-bottom: 2px double #1a1a1a;
+  padding-bottom: 15px;
+}
+
+.articles-title {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+}
+
+.articles-subtitle {
+  font-style: italic;
+  color: #555555;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* 3. Lista de artículos */
+.articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;                          /* Separación entre cada ficha de papel */
+}
+
+/* ======================================================
+   4. LA FILA DE ARTÍCULO (EFECTO PARTITURA ANTIGUA)
+   ====================================================== */
+.article-row {
+  /* Tono pergamino cálido */
+  background-color: #f7f2e4;          
+
+  /* Efecto de líneas sutiles de partitura musical en CSS puro */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 24px,
+    rgba(26, 26, 26, 0.04) 25px,
+    rgba(26, 26, 26, 0.04) 26px
+  );
+
+  border: 1.5px solid #1a1a1a;       /* Borde negro definido */
+  border-radius: 16px;                /* ¡Esquinas redondeadas y suaves! */
+  padding: 24px 28px;
+  display: flex;
+  justify-content: space-between;     /* Texto a la izquierda, botones a la derecha */
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06); /* Sombra de hoja de archivo */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Efecto al pasar el cursor sobre la fila */
+.article-row:hover {
+  transform: translateX(6px);         /* Se desliza suavemente hacia la derecha */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 5. Contenido de texto */
+.article-row-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.article-row-tag {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #4a1525;                     /* Tono vino tinto */
+  letter-spacing: 1.5px;
+}
+
+.article-row-title {
+  font-size: 1.3rem;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.article-row-excerpt {
+  font-size: 0.92rem;
+  color: #333333;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 6. Botones de acción */
+.article-row-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.btn-manage {
+  padding: 9px 18px;
+  font-family: "Georgia", serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 6px;                 /* Botones con esquinas redondeadas a juego */
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Botón Editar */
+.btn-edit {
+  background-color: transparent;
+  color: #1a1a1a;
+  border: 1.5px solid #1a1a1a;
+}
+
+.btn-edit:hover {
+  background-color: #1a1a1a;
+  color: #fbf8f1;
+}
+
+/* Botón Eliminar */
+.btn-delete {
+  background-color: transparent;
+  color: #7a1d1d;
+  border: 1.5px solid #7a1d1d;
+}
+
+.btn-delete:hover {
+  background-color: #7a1d1d;
+  color: #ffffff;
+}

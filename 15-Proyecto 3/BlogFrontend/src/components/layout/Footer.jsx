@@ -6,7 +6,7 @@ function Footer() {
         &copy; {new Date().getFullYear()} Ronald Palacios · Web Developer
       </p>
       <p className="footer-subtext">
-        Opus Classic Gazette · Crónicas y partituras del arte universal
+        Opus Classic Gazette · Chronicles and Scores of Universal Art
       </p>
     </footer>
   );

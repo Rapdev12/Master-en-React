@@ -1,0 +1,141 @@
+/* 1. Contenedor centrado */
+.about-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+/* 2. La Hoja de Partitura (Fondo pautado + Esquinas redondeadas) */
+.music-sheet {
+  background-color: #f7f2e4;          /* Tono pergamino envejecido cálido */
+  
+  /* Efecto de líneas tenues de partitura musical en CSS puro */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 28px,
+    rgba(26, 26, 26, 0.05) 29px,
+    rgba(26, 26, 26, 0.05) 30px
+  );
+  
+  border: 2px solid #1a1a1a;         /* Marco negro clásico */
+  border-radius: 22px;                /* ¡Esquinas bien redondeadas y suaves! */
+  padding: 40px;                      /* Espaciado interno */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra elegante de hoja suelta */
+}
+/* 3. Encabezado de la hoja con símbolos */
+.sheet-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 2px double #1a1a1a;  /* Doble línea de corte */
+  padding-bottom: 15px;
+  margin-bottom: 35px;
+}
+.sheet-symbol {
+  font-size: 2.2rem;                  /* Clave de Sol y Clave de Fa */
+  color: #4a1525;                     /* Color vino tinto */
+  line-height: 1;
+}
+.sheet-title {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #1a1a1a;
+  margin: 0;
+}
+/* 4. Cuerpo de la hoja: Foto a la izquierda y Texto a la derecha */
+.sheet-content {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+/* 5. Foto del autor con marco y esquinas redondeadas */
+.author-photo-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.author-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 16px;                /* Esquinas redondeadas a juego */
+  object-fit: cover;
+  border: 2px solid #1a1a1a;
+  filter: sepia(18%);                 /* Tono envejecido de fotografía antigua */
+  display: block;
+}
+.photo-caption {
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #4a1525;
+}
+/* 6. Texto de la crónica */
+.sheet-text {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+/* 7. Letra Capitular (primera letra grande como en los libros antiguos) */
+.editorial-lead::first-letter {
+  font-size: 3.2rem;                  /* Letra A gigante */
+  float: left;                        /* Se acopla al lado del texto */
+  line-height: 0.8;
+  margin-right: 10px;
+  color: #4a1525;                     /* Vino tinto */
+  font-weight: bold;
+  font-family: "Georgia", serif;
+}
+.editorial-lead,
+.editorial-body {
+  font-size: 1.02rem;
+  line-height: 1.7;                   /* Altura de línea para lectura fluida */
+  color: #2b2b2b;
+  margin: 0;
+  text-align: justify;                /* Texto justificado estilo periódico */
+}
+/* 8. Pie sutil de la hoja */
+.sheet-footer {
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(26, 26, 26, 0.2);
+  text-align: right;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #666666;
+}
+
+/* 1. Contenedor de la cita */
+.editorial-quote {
+  margin: 12px 0 0 0;                 /* Separación superior */
+  padding: 12px 18px;                 /* Espacio interior para que respire */
+  background-color: #eee7d5;          /* Fondo pergamino un tono más oscuro para resaltar */
+  border-left: 4px solid #4a1525;     /* Línea vertical distintiva en color vino tinto */
+  border-radius: 0 10px 10px 0;       /* Curva suave en las esquinas derechas */
+}
+/* 2. El texto de la frase */
+.quote-text {
+  font-style: italic;                 /* Cursiva clásica de cita */
+  font-size: 1.05rem;                 /* Tamaño ligeramente más grande */
+  color: #1a1a1a;
+  line-height: 1.5;
+  margin: 0;
+}
+/* 3. El autor (<cite>) */
+.quote-author {
+  display: block;                     /* Lo baja a su propia línea */
+  text-align: right;                  /* Alineado a la derecha */
+  font-style: normal;                 /* Quitamos la cursiva del autor */
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;          /* En mayúsculas */
+  letter-spacing: 1.5px;              /* Espaciado clásico entre letras */
+  color: #4a1525;                     /* Mismo vino tinto que la línea lateral */
+  margin-top: 6px;
+}

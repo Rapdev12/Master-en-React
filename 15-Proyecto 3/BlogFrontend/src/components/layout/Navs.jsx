@@ -6,16 +6,16 @@ function Navs() {
     <nav className="navbar">
       <ul className="nav-list">
         <li className="nav-item">
-          <NavLink to="/home" className="nav-link">Inicio</NavLink>
+          <NavLink to="/home" className="nav-link">Home</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/articles" className="nav-link">Artículos</NavLink>
+          <NavLink to="/articles" className="nav-link">Articles</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/create" className="nav-link">Crear</NavLink>
+          <NavLink to="/create" className="nav-link">Create</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/aboutme" className="nav-link">Sobre Mí</NavLink>
+          <NavLink to="/aboutme" className="nav-link">About Me</NavLink>
         </li>
       </ul>
     </nav>

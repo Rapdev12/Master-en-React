@@ -5,7 +5,6 @@ import EditArticles from '../components/pages/EditArticles';
 import CreateArticles from '../components/pages/CreateArticles';
 import Header from "../components/layout/Header";
 import Navs from "../components/layout/Navs";
-import Sidebar from "../components/layout/Sidebar";
 import Footer from '../components/layout/Footer';
 import Aboutme from "../components/pages/Aboutme";
 // Importamos los estilos del layout
@@ -22,9 +21,7 @@ function Routings() {
         <Header />
         {/* 2. Barra de navegación justo debajo del Header */}
         <Navs />
-        {/* 3. ¡EL CONTENEDOR FLEX! Junta el Sidebar a la izquierda y las páginas a la derecha */}
-        <div className="app-body">
-          <Sidebar />
+                       
 
           <main className="main-content">
 
@@ -44,7 +41,7 @@ function Routings() {
           </main>
         </div>
         <Footer />
-      </div>
+      
 
     </BrowserRouter>
 
