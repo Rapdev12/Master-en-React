@@ -1,6 +1,35 @@
+import { useEffect, useState } from 'react';
 import './Articles.css';
+import { Global } from '../../helpers/Global';
+import { Petitions } from '../../helpers/Petitions';
 
 function Articles() {
+
+  const [articles, setArticles] = useState([]);
+
+
+useEffect(() => {
+  const searchArticle = async () => {
+    try {
+
+      const { information } = await Petitions(Global.url + "article", "GET")
+
+      if (information.status == "success") {
+        setArticles(information.articles)
+      }
+    }
+    catch (error) {
+      console.error("Error:", error);
+
+    };
+   
+  };
+ 
+    searchArticle();
+
+  }, []);
+
+
   return (
     <section className="articles-container">
       {/* Cabecera de la sección */}
@@ -11,59 +40,36 @@ function Articles() {
 
       {/* Lista de artículos en formato de filas de gaceta */}
       <div className="articles-list">
-        
-        {/* FILA DE ARTÍCULO 1 */}
-        <article className="article-row">
-          <div className="article-row-content">
-            <span className="article-row-tag">Crítica • 20 Ago, 2026</span>
-            <h3 className="article-row-title">La Quinta Sinfonía de Beethoven</h3>
-            <p className="article-row-excerpt">
-              Análisis estructural sobre el motivo del destino y la instrumentación orquestal...
-            </p>
-          </div>
+        {
+          articles.length >= 1? (
+        articles.map(articles => {
+          return (
+            /* FILA DE ARTÍCULO 1 */
+            <article key={articles.id} className="article-row">
+              <div className="article-row-content">
+                <span className="article-row-tag">Crítica • 20 Ago, 2026</span>
+                <h3 className="article-row-title">{articles.title}</h3>
+                <p className="article-row-excerpt">
+                  {articles.description}
+                </p>
+              </div>
 
-          <div className="article-row-actions">
-            <button type="button" className="btn-manage btn-edit">Editar</button>
-            <button type="button" className="btn-manage btn-delete">Eliminar</button>
-          </div>
-        </article>
-
-        {/* FILA DE ARTÍCULO 2 */}
-        <article className="article-row">
-          <div className="article-row-content">
-            <span className="article-row-tag">Análisis • 18 Ago, 2026</span>
-            <h3 className="article-row-title">Sonata Claro de Luna (Opus 27 N.º 2)</h3>
-            <p className="article-row-excerpt">
-              El lenguaje romántico temprano y la atmósfera poética de Ludwig van Beethoven...
-            </p>
-          </div>
-
-          <div className="article-row-actions">
-            <button type="button" className="btn-manage btn-edit">Editar</button>
-            <button type="button" className="btn-manage btn-delete">Eliminar</button>
-          </div>
-        </article>
-
-        {/* FILA DE ARTÍCULO 3 */}
-        <article className="article-row">
-          <div className="article-row-content">
-            <span className="article-row-tag">Barroco • 15 Ago, 2026</span>
-            <h3 className="article-row-title">Las Cuatro Estaciones de Vivaldi</h3>
-            <p className="article-row-excerpt">
-              Innovaciones del violín barroco y el programa descriptivo en la Venecia del siglo XVIII...
-            </p>
-          </div>
-
-          <div className="article-row-actions">
-            <button type="button" className="btn-manage btn-edit">Editar</button>
-            <button type="button" className="btn-manage btn-delete">Eliminar</button>
-          </div>
-        </article>
-
+              <div className="article-row-actions">
+                <button type="button" className="btn-manage btn-edit">Editar</button>
+                <button type="button" className="btn-manage btn-delete">Eliminar</button>
+              </div>
+            </article>
+          )
+        }
+      )
+    ): (
+          <p className="no-articles">Cargando artículos o no hay registros disponibles...</p>
+        )}
+   
       </div>
     </section>
   );
-}
+};
 
 export default Articles;
 
