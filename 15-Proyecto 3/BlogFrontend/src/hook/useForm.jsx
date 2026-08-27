@@ -9,10 +9,8 @@ export const useForm = (dataForm ={}) =>{
 
         let course = {
             titulo: e.target.titulo.value,
-            anio: e.target.anio.value,
-            descripcion: e.target.descripcion.value,
-            autor: e.target.autor.value,
-            email: e.target.mail.value
+            descripcion: e.target.descripcion.value
+            
         }
         setMyForm(course)
         

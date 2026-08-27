@@ -1,5 +1,5 @@
 
-export const Petitions = async (newurl, metodo, saveData = "") => {
+export const Petitions = async (newurl, metodo, saveData = "", files =false) => {
 
     let information = [];
 
@@ -16,12 +16,22 @@ export const Petitions = async (newurl, metodo, saveData = "") => {
         }
 
         if (metodo == "POST" || metodo == "PUT") {
-            options = {
+            let body = JSON.stringify(saveData)
+            
+            if (files){
+                options = {
                 method: metodo,
-                body: JSON.stringify(saveData),
+                body: saveData
+                } 
+            }else{
+                options = {
+                method: metodo,
+                body,
                 headers: {
                     "Content-Type": "application/json"
                 }
+            }
+            
             }
         }
 

@@ -12,7 +12,7 @@ useEffect(() => {
   const searchArticle = async () => {
     try {
 
-      const { information } = await Petitions(Global.url + "article", "GET")
+      const { information } = await Petitions(Global.url + "article", "GET",)
 
       if (information.status == "success") {
         setArticles(information.articles)

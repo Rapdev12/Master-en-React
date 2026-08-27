@@ -1,13 +1,9 @@
-
-/* 1. Contenedor principal centrado */
 .create-container {
-  max-width: 750px;                   /* Ancho ideal para formularios cómodos */
-  margin: 0 auto;                     /* Centra el formulario en la pantalla */
+  max-width: 750px;
+  margin: 0 auto;
   padding: 50px 20px;
   font-family: "Georgia", "Times New Roman", serif;
 }
-
-/* 2. Título de la sección */
 .create-title {
   text-align: center;
   font-size: 2rem;
@@ -16,98 +12,90 @@
   color: #1a1a1a;
   margin: 0 0 35px 0;
   padding-bottom: 12px;
-  border-bottom: 2px double #1a1a1a;  /* Borde doble característico */
+  border-bottom: 2px double #1a1a1a;
 }
-
-/* 3. La caja del formulario */
+/* EL FORMULARIO CON EFECTO DE HOJA */
 .create-form {
-  background-color: #ffffff;          /* Fondo blanco que resalta del pergamino */
-  border: 1px solid #d8cfc0;         /* Borde sutil */
-  border-radius: 4px;
-  padding: 40px;                      /* Espacio interior generoso */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); /* Sombra suave */
+  background-color: #f7f2e4;          /* Fondo pergamino cálido */
+  
+  /* Líneas pautadas de partitura */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 28px,
+    rgba(26, 26, 26, 0.04) 29px,
+    rgba(26, 26, 26, 0.04) 30px
+  );
+  border: 1.5px solid #1a1a1a;
+  border-radius: 20px;                /* Esquinas redondeadas estilo manuscrito */
+  padding: 40px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
   display: flex;
-  flex-direction: column;             /* Apila los campos hacia abajo */
-  gap: 22px;                          /* Espacio limpio entre cada campo */
+  flex-direction: column;
+  gap: 22px;
 }
-
-/* 4. Grupo de cada campo (Label + Input) */
 .form-group {
   display: flex;
-  flex-direction: column;             /* Coloca la etiqueta ARRIBA del input */
-  gap: 8px;                           /* Separación entre la etiqueta y el campo */
+  flex-direction: column;
+  gap: 8px;
 }
-
-/* 5. Etiquetas (<label>) */
 .form-label {
   font-size: 0.85rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #4a1525;                     /* Color vino tinto elegante */
+  color: #4a1525;
 }
-
-/* 6. Campos de texto (<input>) y Área de texto (<textarea>) */
+/* Campos de texto con fondo blanco suave para que contrasten */
 .form-input,
 .form-textarea {
-  font-family: "Georgia", serif;      /* Misma tipografía clásica al escribir */
+  font-family: "Georgia", serif;
   font-size: 0.95rem;
   color: #1a1a1a;
-  background-color: #faf8f5;          /* Fondo crema muy suave */
-  border: 1px solid #1a1a1a;         /* Borde negro fino */
-  border-radius: 2px;
+  background-color: #ffffff;
+  border: 1px solid #1a1a1a;
+  border-radius: 6px;
   padding: 12px 14px;
-  outline: none;                      /* Quita el borde azul del navegador */
+  outline: none;
   transition: all 0.2s ease;
 }
-
-/* Efecto cuando el usuario hace clic para escribir */
 .form-input:focus,
 .form-textarea:focus {
-  background-color: #ffffff;          /* Se vuelve blanco puro al escribir */
-  border-color: #4a1525;              /* Borde vino tinto activo */
-  box-shadow: 0 0 5px rgba(74, 21, 37, 0.15); /* Sombra muy sutil */
+  border-color: #4a1525;
+  box-shadow: 0 0 6px rgba(74, 21, 37, 0.2);
 }
-
-/* 7. Altura del área de texto para el contenido */
 .form-textarea {
-  min-height: 180px;                  /* Altura inicial generosa */
-  resize: vertical;                   /* Solo permite agrandar hacia abajo, no hacia los lados */
+  min-height: 180px;
+  resize: vertical;
   line-height: 1.6;
 }
-
-/* 8. Campo de archivo (<input type="file">) */
 .form-file {
   font-family: "Georgia", serif;
   font-size: 0.85rem;
   color: #555555;
   padding: 8px 0;
 }
-
-/* 9. Botón de Enviar / Publicar */
 .form-actions {
   display: flex;
-  justify-content: flex-end;          /* Alinea el botón a la derecha */
+  justify-content: flex-end;
   margin-top: 10px;
 }
-
 .btn-submit {
   padding: 12px 28px;
-  background-color: #1a1a1a;          /* Fondo negro */
-  color: #fbf8f1;                     /* Texto crema */
+  background-color: #1a1a1a;
+  color: #fbf8f1;
   font-family: "Georgia", serif;
   font-size: 0.9rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   border: 1px solid #1a1a1a;
-  border-radius: 2px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
 .btn-submit:hover {
-  background-color: #4a1525;          /* Vino tinto al pasar el mouse */
+  background-color: #4a1525;
   border-color: #4a1525;
-  box-shadow: 0 4px 10px rgba(74, 21, 37, 0.2);
+  box-shadow: 0 4px 12px rgba(74, 21, 37, 0.25);
 }
