@@ -2,14 +2,13 @@ import './CreateArticles.css';
 import { useForm } from '../../hook/useForm';
 import { Petitions } from '../../helpers/Petitions';
 import { Global } from '../../helpers/Global';
-import { useState } from 'react';
+
 
 
 
 function CreateArticles() {
 
-  const [result, setResult] = useState(false)
-  const { estado, sendme, change } = useForm({});
+  const { estado, change } = useForm({});
 
   const saveArticle = async (e) => {
     try {
@@ -33,6 +32,7 @@ function CreateArticles() {
         } else {
           console.log("No se seleccionó ningún archivo.");
         }
+        e.target.reset();
       }
     } catch (error) {
       console.error("Error:", error);

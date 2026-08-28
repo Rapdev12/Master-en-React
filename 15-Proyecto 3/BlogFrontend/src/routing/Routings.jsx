@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../components/pages/Home"
 import Articles from '../components/pages/Articles';
-import EditArticles from '../components/pages/EditArticles';
 import CreateArticles from '../components/pages/CreateArticles';
 import Header from "../components/layout/Header";
 import Navs from "../components/layout/Navs";
@@ -30,7 +29,6 @@ function Routings() {
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/articles" element={<Articles />} />
-              <Route path="/edit" element={<EditArticles />} />
               <Route path="/create" element={<CreateArticles />} />
               <Route path="/aboutme" element={<Aboutme />} />
 

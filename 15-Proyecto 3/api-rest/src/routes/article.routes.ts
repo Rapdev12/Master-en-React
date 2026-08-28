@@ -13,6 +13,7 @@ router.get("/article/:id", ArticleController.searchId);
 router.get("/searcher/:searchering", ArticleController.searcher);
 router.post("/create", ArticleController.create);
 router.post("/subir-imagen/:id", uploads.single("file"), ArticleController.articleImagen)
+router.get("/imagen/:filename", ArticleController.imagen);
 router.delete("/article/:id", ArticleController.remove);
 router.put("/article/:id", ArticleController.update);
 

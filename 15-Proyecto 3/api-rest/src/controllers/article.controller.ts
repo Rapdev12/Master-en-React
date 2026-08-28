@@ -3,6 +3,7 @@ import { Article } from "../models/article.model";
 import { validateArticle } from "../helpers/validateArticle";
 import { validateImage } from "../helpers/validateImagen";
 import fs from "fs";
+import path from "path";
 
 export const create = async (req: Request, res: Response) => {
   //Recoge paramatros por post a guardar
@@ -259,4 +260,19 @@ export const searcher = async (req: Request, res: Response): Promise<Response> =
       mensaje: "Error en la búsqueda",
     });
   }
+};
+export const imagen = (req: Request, res: Response) => {
+  let filename = req.params.filename;
+  let roadFilename = "./uploads/articles/" + filename;
+
+  fs.stat(roadFilename, (error, existe) => {
+    if (existe) {
+      return res.sendFile(path.resolve(roadFilename));
+    } else {
+      return res.status(404).json({
+        status: "error",
+        mensaje: "La imagen no existe",
+      });
+    }
+  });
 };

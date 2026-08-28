@@ -1,7 +1,3 @@
-/* ======================================================
-   ARTÍCULOS - FILAS CON EFECTO DE PAPEL DE PARTITURA
-   ====================================================== */
-
 /* 1. Contenedor principal */
 .articles-container {
   max-width: 950px;
@@ -37,7 +33,7 @@
 .articles-list {
   display: flex;
   flex-direction: column;
-  gap: 22px;                          /* Separación entre cada ficha de papel */
+  gap: 22px; /* Separación entre cada ficha de papel */
 }
 
 /* ======================================================
@@ -45,7 +41,7 @@
    ====================================================== */
 .article-row {
   /* Tono pergamino cálido */
-  background-color: #f7f2e4;          
+  background-color: #f7f2e4;
 
   /* Efecto de líneas sutiles de partitura musical en CSS puro */
   background-image: repeating-linear-gradient(
@@ -56,20 +52,22 @@
     rgba(26, 26, 26, 0.04) 26px
   );
 
-  border: 1.5px solid #1a1a1a;       /* Borde negro definido */
-  border-radius: 16px;                /* ¡Esquinas redondeadas y suaves! */
+  border: 1.5px solid #1a1a1a; /* Borde negro definido */
+  border-radius: 16px; /* ¡Esquinas redondeadas y suaves! */
   padding: 24px 28px;
   display: flex;
-  justify-content: space-between;     /* Texto a la izquierda, botones a la derecha */
+  justify-content: space-between; /* Texto a la izquierda, botones a la derecha */
   align-items: center;
   gap: 20px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06); /* Sombra de hoja de archivo */
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 /* Efecto al pasar el cursor sobre la fila */
 .article-row:hover {
-  transform: translateX(6px);         /* Se desliza suavemente hacia la derecha */
+  transform: translateX(6px); /* Se desliza suavemente hacia la derecha */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -77,14 +75,16 @@
 .article-row-content {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
+  flex: 1; /* Esto hace que el texto ocupe todo el espacio disponible del medio */
+  padding: 0 10px;
 }
 
 .article-row-tag {
   font-size: 0.75rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: #4a1525;                     /* Tono vino tinto */
+  color: #4a1525; /* Tono vino tinto */
   letter-spacing: 1.5px;
 }
 
@@ -108,6 +108,14 @@
   gap: 12px;
   flex-shrink: 0;
 }
+.article-row img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #1a1a1a;
+  flex-shrink: 0;
+}
 
 .btn-manage {
   padding: 9px 18px;
@@ -116,7 +124,7 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-radius: 6px;                 /* Botones con esquinas redondeadas a juego */
+  border-radius: 6px; /* Botones con esquinas redondeadas a juego */
   cursor: pointer;
   transition: all 0.2s ease;
 }
