@@ -1,6 +1,4 @@
-/* ======================================================
-   SIDEBAR (COLUMNA IZQUIERDA) - ESTILO GACETA CLÁSICA
-   ====================================================== */
+
 /* 1. Contenedor principal de la barra lateral (<aside>) */
 .sidebar {
   width: 260px;                       /* Ancho fijo para la columna lateral */
@@ -9,18 +7,19 @@
   border-right: 2px solid #1a1a1a;    /* Línea vertical divisoria a la derecha */
   padding: 25px 20px;                 /* Espacio interior */
   font-family: "Georgia", "Times New Roman", serif;
-  box-sizing: border-box;             /* Asegura que el padding no desborde el ancho */
+  box-sizing: border-box; 
+  margin-top: 22px;            /* Asegura que el padding no desborde el ancho */
 }
 /* 2. Título de la sección del Sidebar (<h3>) */
 .sidebar-title {
-  font-size: 1.1rem;                  /* Tamaño moderado pero con presencia */
+  font-size: 1.8rem;                  /* Tamaño moderado pero con presencia */
   text-transform: uppercase;          /* En mayúsculas */
   letter-spacing: 1.5px;              /* Espaciado entre letras */
   color: #1a1a1a;                     /* Tinta negra carbón */
   margin: 0 0 15px 0;                 /* Solo margen inferior */
   padding-bottom: 6px;                /* Espacio antes de la línea */
   border-bottom: 2px double #1a1a1a;  /* Borde doble clásico bajo el título */
-  text-align: left;                   /* Alineado a la izquierda */
+  text-align: center;                   /* Alineado a la izquierda */
 }
 /* 3. Contenedor del formulario de búsqueda (<div>) */
 .search-box {

@@ -29,7 +29,8 @@
 }
 /* LA TARJETA CON EFECTO DE HOJA */
 .card {
-  background-color: #f7f2e4;          /* Fondo pergamino cálido */
+  background-color: #f7f2e4;   
+  max-width: 350px;       /* Fondo pergamino cálido */
   
   /* Líneas pautadas de partitura en CSS puro */
   background-image: repeating-linear-gradient(

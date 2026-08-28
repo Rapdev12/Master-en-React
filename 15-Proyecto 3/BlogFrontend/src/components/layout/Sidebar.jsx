@@ -1,6 +1,8 @@
-import './Sidebar.css';
+import "./Sidebar.css"
 
-function Sidebar() {
+
+function Sidebar({ texto, setTexto, onSearch }) {
+
   return (
     <aside className="sidebar">
       {/* Título de la sección */}
@@ -9,10 +11,14 @@ function Sidebar() {
       <div className="search-box">
         <input 
           type="text" 
+          value={texto}
+          onChange={(e) => setTexto(e.target.value)}
           placeholder="Search for a work, author..." 
           className="search-input" 
         />
-        <button type="button" className="search-button">
+        <button type="button" 
+        className="search-button"
+         onClick={onSearch}>
           Search
         </button>
       </div>

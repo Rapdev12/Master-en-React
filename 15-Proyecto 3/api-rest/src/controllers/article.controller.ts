@@ -146,20 +146,20 @@ export const update = async (
     if (!articleUpdated) {
       return res.status(404).json({
         status: "error",
-        mensaje: "No se ha encontrado el artículo para actualizar",
+        mensaje: "The article to be updated was not found.",
       });
     }
 
     // 5. Si todo sale bien, devolvemos el artículo actualizado
     return res.status(200).json({
       status: "success",
-      mensaje: "Actualizado correctamente",
+      mensaje: "Successfully updated",
       article: articleUpdated,
     });
   } catch (error) {
     return res.status(500).json({
       status: "error",
-      mensaje: "Error al intentar actualizar el artículo",
+      mensaje: "Error while attempting to update the article",
     });
   }
 };
@@ -172,7 +172,7 @@ export const articleImagen = async (
     if (!req.file) {
       return res.status(400).json({
         status: "error",
-        mensaje: "No se ha enviado ninguna imagen",
+        mensaje: "No image has been sent.",
       });
     }
 
@@ -191,7 +191,7 @@ export const articleImagen = async (
     if (!article) {
       return res.status(404).json({
         status: "error",
-        mensaje: "Artículo no encontrado",
+        mensaje: "Article not found",
       });
     }
     //→ obtener imagen anterior
@@ -208,28 +208,28 @@ export const articleImagen = async (
     if (oldImage !== "default.png") {
       fs.unlink(`./uploads/articles/${oldImage}`, (error) => {
         if (error) {
-          console.log("No se pudo eliminar la imagen anterior");
+          console.log("The previous image could not be deleted.");
         }
       });
     }
     //→ respondo
     return res.status(200).json({
       status: "success",
-      mensaje: "Imagen subida correctamente",
+      mensaje: "Image uploaded successfully",
       archivo: req.file.filename,
     });
 
   } catch (error) {
     return res.status(500).json({
       status: "error",
-      mensaje: "Error al intentar actualizar el artículo",
+      mensaje: "Error while attempting to update the article",
     });
   }
 };
 
 export const searcher = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const searchering = req.params.busqueda;
+    const searchering = req.params.searchering;
 
     // Forzamos el tipo con "any" para que TypeScript no discuta con los operadores de MongoDB
     const query: any = {
@@ -244,7 +244,7 @@ export const searcher = async (req: Request, res: Response): Promise<Response> =
     if (!articles || articles.length === 0) {
       return res.status(404).json({
         status: "error",
-        mensaje: "No se han encontrado artículos para tu búsqueda",
+        mensaje: "No articles were found for your search.",
       });
     }
 
@@ -257,7 +257,7 @@ export const searcher = async (req: Request, res: Response): Promise<Response> =
   } catch (error) {
     return res.status(500).json({
       status: "error",
-      mensaje: "Error en la búsqueda",
+      mensaje: "Search error",
     });
   }
 };
@@ -271,7 +271,7 @@ export const imagen = (req: Request, res: Response) => {
     } else {
       return res.status(404).json({
         status: "error",
-        mensaje: "La imagen no existe",
+        mensaje: "The image does not exist.",
       });
     }
   });

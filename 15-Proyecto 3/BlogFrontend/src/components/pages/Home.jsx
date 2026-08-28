@@ -1,81 +1,99 @@
+// Home.jsx
 import { useState } from "react";
 import Sidebar from "../layout/Sidebar";
+import { useArticles } from "../../hook/useArticles";
+import { Global } from "../../helpers/Global";
 import './Home.css';
-
+import { useSearchArticle } from "../../hook/useSearchArticle";
 
 function Home() {
+  // para traeme TODOS los artículos
+  const { articles: allArticles, loading } = useArticles();
 
-  const [showDescription, setshowDescription] = useState(false);
+  // Guardo para qué los artículos esten "expandidos" (mostrando su descripción completa)
+  const [expandedIds, setExpandedIds] = useState([]);
 
+  // aca esta la lógica de búsqueda
+  const { articles: searchResults, texto, setTexto, fetchArticles } = useSearchArticle();
+
+  // Si el usuario escribió algo en el buscador
+  const isSearching = texto.trim().length > 0;
+  const articlesToShow = isSearching ? searchResults : allArticles;
+
+  // Agrega o quita el id del artículo en expandedIds
+  const toggleDescription = (id) => {
+    setExpandedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
 
   return (
     <div className="home-layout">
-      {/* 1. Sidebar exclusivo de la portada */}
-      <Sidebar />
+      {/* 1. Sidebar exclusivo de la portada,  recibe todo por props */}
+      <Sidebar
+        texto={texto}
+        setTexto={setTexto}
+        onSearch={() => fetchArticles(texto)}
+      />
+
       {/* 2. Contenido principal a la derecha */}
       <section className="home-content">
-        <h2 className="section-title">Featured Edition</h2>
+        {/* El título cambia según si estamos buscando o mostrando los destacados */}
+        <h2 className="section-title">
+          {isSearching ? `Resultados para "${texto}"` : "Featured Edition"}
+        </h2>
+
         <div className="cards-grid">
-          {/* Tarjeta 1 */}
-          <article className="card">
-            <div className="card-image-wrapper">
-              <img
-                src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=500&q=80"
-                alt="Beethoven"
-                className="card-image"
-              />
-            </div>
-            <div className="card-body">
-              <span className="card-tag">Review • Aug 20</span>
-              <h3 className="card-title">Beethoven's Fifth Symphony</h3>
-              {showDescription && (
-                <p className="card-text">
-                  The fate motif and the revolutionary orchestral force that transformed Viennese music forever.
-                </p>
-              )}
-              <button type="button" className="card-button" onClick={() => setshowDescription(!showDescription)}
-              >{showDescription ? 'Hide Article' : 'Read Article'}</button>
-            </div>
-          </article>
-          {/* Tarjeta 2 */}
-          <article className="card">
-            <div className="card-image-wrapper">
-              <img
-                src="https://images.unsplash.com/photo-1526142684086-7ebd69df27a5?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Mozart"
-                className="card-image"
-              />
-            </div>
-            <div className="card-body">
-              <span className="card-tag">Historia • 18 Ago</span>
-              <h3 className="card-title">El Enigma del Réquiem de Mozart</h3>
-              <p className="card-text">
-                Mitos, manuscritos y los secretos de la misteriosa misa de difuntos inacabada por el genio de Salzburgo.
-              </p>
-              <button type="button" className="card-button">Leer Artículo</button>
-            </div>
-          </article>
-          {/* Tarjeta 3 */}
-          <article className="card">
-            <div className="card-image-wrapper">
-              <img
-                src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=500&q=80"
-                alt="Vivaldi"
-                className="card-image"
-              />
-            </div>
-            <div className="card-body">
-              <span className="card-tag">Barroco • 15 Ago</span>
-              <h3 className="card-title">Las Cuatro Estaciones de Vivaldi</h3>
-              <p className="card-text">
-                El virtuosismo del violín y la música descriptiva que definieron el sonido de la Venecia del siglo XVIII.
-              </p>
-              <button type="button" className="card-button">Leer Artículo</button>
-            </div>
-          </article>
+          {/* Mientras carga el fetch inicial de artículos, mostramos "Cargando..." */}
+          {loading ? (
+            <p>Cargando artículos...</p>
+          ) : articlesToShow.length > 0 ? (
+            articlesToShow.map((article) => {
+              const isExpanded = expandedIds.includes(article._id);
+
+              return (
+                <article key={article._id} className="card">
+                  <div className="card-image-wrapper">
+                    <img
+                      src={
+                        article.imagen && article.imagen !== "default.png"
+                          ? Global.url + "imagen/" + article.imagen
+                          : "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=500&q=80"
+                      }
+                      alt={article.title}
+                      className="card-image"
+                    />
+                  </div>
+                  <div className="card-body">
+                    <span className="card-tag">
+                      {new Date(article.date).toLocaleDateString("es-ES", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                    <h3 className="card-title">{article.title}</h3>
+                    {isExpanded && (
+                      <p className="card-text">{article.content}</p>
+                    )}
+                    <button
+                      type="button"
+                      className="card-button"
+                      onClick={() => toggleDescription(article._id)}
+                    >
+                      {isExpanded ? "Hide Article" : "Read Article"}
+                    </button>
+                  </div>
+                </article>
+              );
+            })
+          ) : (
+            <p className="no-articles">No items available.</p>
+          )}
         </div>
       </section>
     </div>
   );
 }
+
 export default Home;
