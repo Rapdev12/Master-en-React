@@ -39,23 +39,7 @@ A professional editorial web application and content management system inspired 
 ## 📂 Project Structure
 
 ```text
-portfolio-web/
-├── public/               # Static assets & logos (e.g., imagen-rp.svg)
-├── src/
-│   ├── assets/           # Images and static media files
-│   ├── component/        # Reusable components (Header, Footer, etc.)
-│   ├── data/             # Data files and mock information
-│   ├── router/           # Application routing configuration
-│   ├── App.css           # Root component styles
-│   ├── App.jsx           # Main application wrapper
-│   ├── index.css         # Global styles & font imports
-│   └── main.jsx          # Entry point
-├── .gitignore
-├── README.md
-├── eslint.config.js
-├── index.html
-├── package.json
-└── pnpm-lock.yaml
+
 💻 Getting Started
 To run this project locally on your machine, follow these steps:
 
