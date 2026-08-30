@@ -1,0 +1,47 @@
+#  con pnpm
+pnpm create vite red-social --template react-ts
+
+# Estructura de mi Front
+red-social/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   ├── types/
+│   │   └── index.ts       ← Aquí defines tus interfaces
+│   ├── App.tsx            ← Nota la extensión .tsx
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── tsconfig.json          ← Configuración de TypeScript
+├── tsconfig.node.json
+├── package.json
+└── vite.config.ts
+
+
+# Configuración Recomendada para tsconfig.json
+
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
