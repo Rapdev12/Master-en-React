@@ -1,0 +1,40 @@
+Api-Rest/
+├── node_modules/
+├── src/
+│   ├── config/                    # Se queda igual (BD, env, server)
+│   │   ├── database.ts
+│   │   └── env.ts
+│   │
+│   ├── middlewares/                # Se queda igual (transversal a toda la app)
+│   │   ├── auth.middleware.ts
+│   │   └── error.middleware.ts
+│   │
+│   ├── shared/                     # 🆕 Nueva carpeta: lo que usan VARIOS módulos
+│   │   ├── utils/                  # Ex "helpers/" que sea genérico (fechas, formateo, etc.)
+│   │   ├── errors/                 # Clases de error custom (NotFoundError, etc.)
+│   │   └── types/                  # Tipos compartidos entre módulos
+│   │
+│   ├── modules/                    # 🆕 EL CORAZÓN: acá migra todo lo específico de negocio
+│   │   ├── products/
+│   │   │   ├── product.interface.ts    # Tipos/DTOs de Product
+│   │   │   ├── product.schema.ts       # Validación (Zod, si sumás)
+│   │   │   ├── product.model.ts        # Schema de Mongoose
+│   │   │   ├── product.repository.ts   # 🆕 Antes esto vivía mezclado en el service
+│   │   │   ├── product.service.ts
+│   │   │   ├── product.controller.ts
+│   │   │   └── product.routes.ts
+│   │   │
+│   │   └── users/                  # Mismo patrón para cada entidad nueva
+│   │       ├── user.interface.ts
+│   │       ├── user.model.ts
+│   │       ├── user.repository.ts
+│   │       ├── user.service.ts
+│   │       ├── user.controller.ts
+│   │       └── user.routes.ts
+│   │
+│   └── index.ts                    # Se queda en la raíz de src/, registra todos los módulos
+│
+├── .env
+├── .gitignore
+├── package.json
+└── tsconfig.json

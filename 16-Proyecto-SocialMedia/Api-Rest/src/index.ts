@@ -1,30 +1,39 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import { connectDB } from "./config/db";
 import cors from "cors";
-
+import userRoutes from "./modules/users/user.routes";
 
 const app = express();
 const PORT = 3000;
 
-// Ejecutamos la conexión a MongoDB
-connectDB();
-
-// 1. Configurar CORS (para permitir peticiones desde tu frontend de React)
 app.use(cors());
-
-// 2. Configurar express.json para que el servidor pueda recibir y entender JSON en el req.body
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
-
-//Rutas
-
-//Crear el servidor y escuchar las peticiones Htpp
+app.use("/api/user", userRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Social network server active, organized, and running with TypeScript.");
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err);
+  res.status(500).json({
+    message: err.message || "Error interno del servidor",
+  });
 });
+
+//Me aseguro que mi base de datos y mi server esten opetivo
+const startServer = async () => {
+  try {
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("No se pudo iniciar el servidor:", error);
+    process.exit(1);
+  }
+};
+
+startServer();
