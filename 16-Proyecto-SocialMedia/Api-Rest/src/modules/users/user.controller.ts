@@ -11,4 +11,13 @@ export const userController = {
       next(error);
     }
   },
+
+  async getById (req: Request, res: Response, next: NextFunction) {
+    try{
+      const user = await userService.getUserById(req.params.id as string);
+      res.status(200).json(user)
+    }catch (error) {
+      next (error)
+    }
+  },
 }

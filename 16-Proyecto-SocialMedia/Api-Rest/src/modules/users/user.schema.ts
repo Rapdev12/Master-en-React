@@ -19,8 +19,11 @@ export const createUserSchema = z.object({
       .min(8, "La contraseña debe tener al menos 8 caracteres"),
 
     image: z.url("La imagen debe ser una URL válida").optional(),
-
-    
+  }),
+});
+export const getUserByIdSchema = z.object({
+  params: z.object({
+    id: z.string().length(24, "El id debe ser un ObjectId válido"),
   }),
 });
 // Ventaja: si mañana cambiás una regla acá, el tipo se actualiza solo.

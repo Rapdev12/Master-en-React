@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import { connectDB } from "./config/db";
 import cors from "cors";
 import userRoutes from "./modules/users/user.routes";
+import { AppError } from "./shared/Error/AppError";
 
 const app = express();
 const PORT = 3000;
@@ -18,6 +19,13 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err);
+
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({
+      message: err.message,
+    });
+  }
+
   res.status(500).json({
     message: err.message || "Error interno del servidor",
   });
