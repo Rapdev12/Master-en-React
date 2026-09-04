@@ -20,4 +20,22 @@ export const userController = {
       next (error)
     }
   },
+
+   async getAll (req: Request, res: Response, next: NextFunction) {
+    try{
+      const users = await userService.getAll();
+      res.status(200).json(users)
+    }catch (error) {
+      next (error)
+    }
+  },
+
+  async deleteUser (req: Request, res: Response, next: NextFunction) {
+    try{
+      const result = await userService.userDelete(req.params.id as string);
+      res.status(200).json(result)
+    }catch (error) {
+      next (error)
+    }
+  },
 }

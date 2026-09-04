@@ -35,4 +35,24 @@ export const userService = {
     const { password, ...userWithoutPassword } = user.toObject();
     return userWithoutPassword;
   },
+
+  async getAll() {
+    const users = await User.find({});
+
+    const userAll = users.map((a) => {
+      const { password, ...userWithoutPassword } = a.toObject();
+      return userWithoutPassword;
+    });
+    return userAll;
+  },
+
+  async userDelete(id: string) {
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+      throw new AppError("Usuario no encontrado", 404);
+    }
+
+    return { mensaje: "Usuario borrado" };
+  },
 };
