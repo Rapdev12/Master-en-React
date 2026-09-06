@@ -32,6 +32,8 @@ export const userController = {
 
   async deleteUser(req: Request, res: Response, next: NextFunction) {
     try {
+      // TODO: comparar req.user.id (vendrá del JWT) contra req.params.id 
+      // — si no coinciden, lanzar new AppError(...) con 403 antes de llamar al service
       const result = await userService.userDelete(req.params.id as string);
       res.status(200).json(result);
     } catch (error) {
@@ -40,9 +42,11 @@ export const userController = {
   },
   async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
+      // TODO: comparar el id del usuario autenticado (req.user.id, vendrá del JWT)
+      // contra req.params.id — si no coinciden, lanzar AppError 403 Forbidden antes de llamar al service
       const update = await userService.userUpdate(
         req.params.id as string,
-        req.body
+        req.body,
       );
       res.status(200).json(update);
     } catch (error) {

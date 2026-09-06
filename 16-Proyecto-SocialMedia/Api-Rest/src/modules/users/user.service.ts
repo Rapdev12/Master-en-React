@@ -9,7 +9,7 @@ export const userService = {
     // 1. Chequear que el nick no exista ya
     const existingUser = await User.findOne({ nick: data.nick });
     if (existingUser) {
-      throw new AppError("El nick ya está en uso", 409); //esto "lanza" el error
+      throw new AppError("The nickname is already in use.", 409); //esto "lanza" el error
     }
 
     // 2. Hashear el password antes de guardar
@@ -30,7 +30,7 @@ export const userService = {
     const user = await User.findById(id);
 
     if (!user) {
-      throw new AppError("Usuario no encontrado", 404);
+      throw new AppError("User not found", 404);
     }
 
     const { password, ...userWithoutPassword } = user.toObject();
@@ -51,10 +51,10 @@ export const userService = {
     const user = await User.findByIdAndDelete(id);
 
     if (!user) {
-      throw new AppError("Usuario no encontrado", 404);
+      throw new AppError("User not found", 404);
     }
 
-    return { mensaje: "Usuario borrado" };
+    return { mensaje: "Deleted user" };
   },
 
   async userUpdate(id: string, data: UpdateUserInput) {
@@ -63,7 +63,7 @@ export const userService = {
     });
 
     if (!user) {
-      throw new AppError("Usuario no encontrado", 404);
+      throw new AppError("User not found", 404);
     }
     const { password, ...userWithoutPassword } = user.toObject();
     return userWithoutPassword;

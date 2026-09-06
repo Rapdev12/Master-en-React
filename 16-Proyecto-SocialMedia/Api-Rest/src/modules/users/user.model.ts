@@ -14,27 +14,27 @@ const UserSchema = new Schema<IUser>(
   {
     name: {
       type: String,
-      required: [true, "El nombre es obligatorio"],
+      required: [true, "The name is mandatory."],
       trim: true, // quita espacios sobrantes al inicio/final
     },
     nick: {
       type: String,
-      required: [true, "El nick es obligatorio"],
+      required: [true, "The nickname is mandatory."],
       unique: true, // no permite nicks repetidos
       trim: true,
       lowercase: true, // normaliza el dato, evita duplicados por mayúsculas
     },
     password: {
       type: String,
-      required: [true, "La contraseña es obligatoria"],
-      minlength: [8, "La contraseña debe tener al menos 8 caracteres"],
+      required: [true, "The password is required."],
+      minlength: [8, "The password must be at least 8 characters long."],
       select: false, // MUY IMPORTANTE: no se trae en los "find" por defecto
     },
     role: {
       type: String,
       enum: {
         values: ["admin", "user"],
-        message: "{VALUE} no es un rol válido",
+        message: "{VALUE} It is not a valid role.",
       },
       default: "user",
     },

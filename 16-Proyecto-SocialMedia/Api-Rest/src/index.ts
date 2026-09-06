@@ -27,7 +27,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   }
 
   res.status(500).json({
-    message: err.message || "Error interno del servidor",
+    message: err.message || "Internal Server Error",
   });
 });
 
@@ -36,10 +36,10 @@ const startServer = async () => {
   try {
     await connectDB();
     app.listen(PORT, () => {
-      console.log(`Servidor corriendo en http://localhost:${PORT}`);
+      console.log(`Server running on http://localhost:${PORT}`);
     });
   } catch (error) {
-    console.error("No se pudo iniciar el servidor:", error);
+    console.error("The server could not be started.:", error);
     process.exit(1);
   }
 };

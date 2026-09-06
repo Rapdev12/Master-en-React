@@ -9,7 +9,7 @@ export const validate =
     if (!result.success) {
       // ✅ Formato simple con issues
       return res.status(400).json({
-        message: "Datos inválidos",
+        message: "Invalid data",
         errors: result.error.issues.map(issue => ({
           path: issue.path.join('.'),
           message: issue.message
