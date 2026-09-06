@@ -12,30 +12,41 @@ export const userController = {
     }
   },
 
-  async getById (req: Request, res: Response, next: NextFunction) {
-    try{
+  async getById(req: Request, res: Response, next: NextFunction) {
+    try {
       const user = await userService.getUserById(req.params.id as string);
-      res.status(200).json(user)
-    }catch (error) {
-      next (error)
+      res.status(200).json(user);
+    } catch (error) {
+      next(error);
     }
   },
 
-   async getAll (req: Request, res: Response, next: NextFunction) {
-    try{
+  async getAll(req: Request, res: Response, next: NextFunction) {
+    try {
       const users = await userService.getAll();
-      res.status(200).json(users)
-    }catch (error) {
-      next (error)
+      res.status(200).json(users);
+    } catch (error) {
+      next(error);
     }
   },
 
-  async deleteUser (req: Request, res: Response, next: NextFunction) {
-    try{
+  async deleteUser(req: Request, res: Response, next: NextFunction) {
+    try {
       const result = await userService.userDelete(req.params.id as string);
-      res.status(200).json(result)
-    }catch (error) {
-      next (error)
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
     }
   },
-}
+  async updateUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const update = await userService.userUpdate(
+        req.params.id as string,
+        req.body
+      );
+      res.status(200).json(update);
+    } catch (error) {
+      next(error);
+    }
+  },
+};

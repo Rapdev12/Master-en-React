@@ -26,5 +26,12 @@ export const getUserByIdSchema = z.object({
     id: z.string().length(24, "El id debe ser un ObjectId válido"),
   }),
 });
+
+export const updateUserSchema = z.object({
+  body: createUserSchema.shape.body.partial(),
+});
+
+
 // Ventaja: si mañana cambiás una regla acá, el tipo se actualiza solo.
 export type CreateUserInput = z.infer<typeof createUserSchema>["body"];
+export type UpdateUserInput = z.infer<typeof updateUserSchema>["body"];

@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
 import { User } from "./user.model";
-import { CreateUserInput } from "./user.schema";
+import {  CreateUserInput, UpdateUserInput } from "./user.schema";
 import { AppError } from "../../shared/Error/AppError";
+import { optional } from "zod";
 
 export const userService = {
   async createUser(data: CreateUserInput) {
@@ -54,5 +55,17 @@ export const userService = {
     }
 
     return { mensaje: "Usuario borrado" };
+  },
+
+  async userUpdate(id: string, data: UpdateUserInput) {
+    const user = await User.findByIdAndUpdate(id, data, {
+      new: true,
+    });
+
+    if (!user) {
+      throw new AppError("Usuario no encontrado", 404);
+    }
+    const { password, ...userWithoutPassword } = user.toObject();
+    return userWithoutPassword;
   },
 };
