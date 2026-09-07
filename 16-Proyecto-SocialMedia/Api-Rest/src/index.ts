@@ -1,8 +1,11 @@
+import 'dotenv/config';
 import express, { Request, Response, NextFunction } from "express";
 import { connectDB } from "./config/db";
 import cors from "cors";
 import userRoutes from "./modules/users/user.routes";
 import { AppError } from "./shared/Error/AppError";
+import authRouter from './modules/auth/auth.routes';
+
 
 const app = express();
 const PORT = 3000;
@@ -12,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/user", userRoutes);
+app.use("/api/auth", authRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Social network server active, organized, and running with TypeScript.");
