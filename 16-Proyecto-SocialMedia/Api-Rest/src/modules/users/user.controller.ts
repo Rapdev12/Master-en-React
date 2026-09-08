@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { userService } from "./user.service";
+import { AppError } from "../../shared/Error/AppError";
 
 export const userController = {
   // POST /users
@@ -32,7 +33,10 @@ export const userController = {
 
   async deleteUser(req: Request, res: Response, next: NextFunction) {
     try {
-      // TODO: comparar req.user.id (vendrá del JWT) contra req.params.id 
+      // ownership: solo el dueño de la cuenta puede borrarla (no hay admin en este proyecto)
+       if(req.user!.id !== req.params.id) {
+       return next(new AppError("Forbidden: you can only modify your own account", 403));
+      }
       // — si no coinciden, lanzar new AppError(...) con 403 antes de llamar al service
       const result = await userService.userDelete(req.params.id as string);
       res.status(200).json(result);
@@ -42,7 +46,10 @@ export const userController = {
   },
   async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
-      // TODO: comparar el id del usuario autenticado (req.user.id, vendrá del JWT)
+      // ownership: solo el dueño de la cuenta puede modificarla (no hay admin en este proyecto)
+      if(req.user!.id !== req.params.id) {
+       return next(new AppError("Forbidden: you can only modify your own account", 403));
+      }
       // contra req.params.id — si no coinciden, lanzar AppError 403 Forbidden antes de llamar al service
       const update = await userService.userUpdate(
         req.params.id as string,
