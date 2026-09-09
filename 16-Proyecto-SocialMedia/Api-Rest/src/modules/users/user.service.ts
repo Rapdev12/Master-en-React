@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { User } from "./user.model";
 import {  CreateUserInput, UpdateUserInput } from "./user.schema";
 import { AppError } from "../../shared/Error/AppError";
-import { optional } from "zod";
+
 
 export const userService = {
   async createUser(data: CreateUserInput) {
