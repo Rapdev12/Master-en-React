@@ -23,7 +23,10 @@ const FollowSchema = new Schema<IFollow>(
   {
     // Con esto Mongoose maneja "created_at" y "updated_at" automáticamente
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
-  },
+  }, 
+  
 );
+
+ FollowSchema.index({ user: 1, followed: 1 }, { unique: true });
 
 export const Follow = model<IFollow>("Follow", FollowSchema);

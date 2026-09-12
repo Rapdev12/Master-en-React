@@ -3,7 +3,14 @@ import { Follow } from "./follow.model";
 
 export const followServices = {
   async createFollow(user: string, followed: string) {
-    return await Follow.create({ user, followed });
+    try {
+      return await Follow.create({ user, followed });
+    } catch (error: any) {
+      if (error.code === 11000) {
+        throw new AppError("You are already following this user", 409);
+      }
+      throw error;
+    }
   },
 
   async deleteFollow(user: string, followed: string) {

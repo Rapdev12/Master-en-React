@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
 import { User } from "./user.model";
-import {  CreateUserInput, UpdateUserInput } from "./user.schema";
+import { CreateUserInput, UpdateUserInput } from "./user.schema";
 import { AppError } from "../../shared/Error/AppError";
+import { Follow } from "../follows/follow.model";
 
 
 export const userService = {
@@ -32,9 +33,15 @@ export const userService = {
     if (!user) {
       throw new AppError("User not found", 404);
     }
+    // Contamos a cuántos sigue este usuario (aparece como "user" en esos documentos)
+    const followingCount = await Follow.countDocuments({ user: id });
+
+    // Contamos cuántos siguen a este usuario (aparece como "followed" en esos documentos)
+    const followersCount = await Follow.countDocuments({ followed: id });
 
     const { password, ...userWithoutPassword } = user.toObject();
-    return userWithoutPassword;
+
+    return { ...userWithoutPassword, followingCount, followersCount };
   },
 
   async getAll() {

@@ -19,6 +19,16 @@ export const createUserSchema = z.object({
       .min(8, "The password must be at least 8 characters long."),
 
     image: z.url("The image must be a valid URL.").optional(),
+
+    displayName: z
+    .string()
+    .max(20, "The name cannot exceed 20 characters.")
+    .optional(),
+
+    biography: z
+    .string()
+    .max(150, "The biography cannot exceed 150 characters.")
+    .optional(),
   }),
 });
 export const getUserByIdSchema = z.object({

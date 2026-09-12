@@ -5,6 +5,7 @@ import cors from "cors";
 import userRoutes from "./modules/users/user.routes";
 import { AppError } from "./shared/Error/AppError";
 import authRouter from './modules/auth/auth.routes';
+import followRouter from "./modules/follows/follow.route"
 
 
 const app = express();
@@ -16,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRouter);
-app.use("/api/follow", );
+app.use("/api/follow", followRouter);
 
 
 

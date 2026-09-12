@@ -7,6 +7,8 @@ export interface IUser extends Document{
   password: string;
   role: "admin" | "user"; // "enum" a nivel de TypeScript
   image?: string; // opcional, no todos suben foto
+  displayName: string,
+  biography: string,
   created_at: Date;
    
 }
@@ -41,6 +43,12 @@ const UserSchema = new Schema<IUser>(
     image: {
       type: String,
       default: null,
+    },
+    displayName:{
+       type: String,
+    },
+    biography:{
+       type: String,
     },
   },
   {
