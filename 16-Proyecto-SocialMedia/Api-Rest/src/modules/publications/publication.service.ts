@@ -1,6 +1,7 @@
 import { Publication } from "./publication.model";
 import { AppError } from "../../shared/Error/AppError";
 
+
 export const publicationService = {
   async createPublication(user: string, description?: string, file?: string) {
     return await Publication.create({ user, description, file });
@@ -59,3 +60,5 @@ export const publicationService = {
     return { message: "Deleted Publication" };
   },
 };
+
+

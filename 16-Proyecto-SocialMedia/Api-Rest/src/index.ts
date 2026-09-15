@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRouter);
 app.use("/api/follow", followRouter);
+app.use("/api/publication/",);
 
 
 
