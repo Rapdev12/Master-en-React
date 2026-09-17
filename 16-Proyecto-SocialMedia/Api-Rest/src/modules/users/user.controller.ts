@@ -3,10 +3,13 @@ import { userService } from "./user.service";
 import { AppError } from "../../shared/Error/AppError";
 
 export const userController = {
-  // POST /users
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const newUser = await userService.createUser(req.body);
+      const avatar = req.file?.filename;
+      const newUser = await userService.createUser({
+        ...req.body,
+        image: avatar,
+      });
       res.status(201).json(newUser);
     } catch (error) {
       next(error);
@@ -34,8 +37,10 @@ export const userController = {
   async deleteUser(req: Request, res: Response, next: NextFunction) {
     try {
       // ownership: solo el dueño de la cuenta puede borrarla (no hay admin en este proyecto)
-       if(req.user!.id !== req.params.id) {
-       return next(new AppError("Forbidden: you can only modify your own account", 403));
+      if (req.user!.id !== req.params.id) {
+        return next(
+          new AppError("Forbidden: you can only modify your own account", 403),
+        );
       }
       // — si no coinciden, lanzar new AppError(...) con 403 antes de llamar al service
       const result = await userService.userDelete(req.params.id as string);
@@ -47,14 +52,19 @@ export const userController = {
   async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
       // ownership: solo el dueño de la cuenta puede modificarla (no hay admin en este proyecto)
-      if(req.user!.id !== req.params.id) {
-       return next(new AppError("Forbidden: you can only modify your own account", 403));
+      if (req.user!.id !== req.params.id) {
+        return next(
+          new AppError("Forbidden: you can only modify your own account", 403),
+        );
       }
+      const avatar = req.file?.filename;
       // contra req.params.id — si no coinciden, lanzar AppError 403 Forbidden antes de llamar al service
       const update = await userService.userUpdate(
-        req.params.id as string,
-        req.body,
-      );
+        req.params.id as string, 
+        {
+        ...req.body,
+        image: avatar,
+      });
       res.status(200).json(update);
     } catch (error) {
       next(error);

@@ -3,7 +3,7 @@ import { AppError } from "../../shared/Error/AppError";
 
 
 export const publicationService = {
-  async createPublication(user: string, description?: string, file?: string) {
+  async createPublication(user: string, description?: string, file?: string[]) {
     return await Publication.create({ user, description, file });
   },
 
@@ -34,7 +34,7 @@ export const publicationService = {
     return publication;
   },
 
-  async updatePublication(id: string, description?: string, file?: string) {
+  async updatePublication(id: string, description?: string, file?: string []) {
     const update = await Publication.findByIdAndUpdate(
       id,
       {

@@ -2,16 +2,18 @@ import { Request, Response, NextFunction } from "express";
 import { publicationService } from "./publication.service";
 import { AppError } from "../../shared/Error/AppError";
 
+
 export const publicationController = {
   async createPublication(req: Request, res: Response, next: NextFunction) {
     try {
-      const { description, file } = req.body;
+      const { description } = req.body;
       const user = req.user!.id;
-
+      const files = (req.files as Express.Multer.File[])?.map((file) => file.filename);
+      
       const publication = await publicationService.createPublication(
-        user,
-        description,
-        file,
+       user,
+       description,
+       files
       );
 
       res.status(201).json(publication);
@@ -53,8 +55,10 @@ export const publicationController = {
   async updatePublication(req: Request, res: Response, next: NextFunction) {
     try {
       const id = req.params.id as string; // o req.params.id as string
-      const { description, file } = req.body;
+      const { description} = req.body;
       const userId = req.user!.id;
+      const files = (req.files as Express.Multer.File[])?.map((file) => file.filename);
+
       const publication = await publicationService.getPublicationById(id);
 
       if (publication.user._id.toString() !== userId) {
@@ -66,7 +70,7 @@ export const publicationController = {
       const update = await publicationService.updatePublication(
         id,
         description,
-        file,
+        files,
       );
       res.status(200).json(update);
     } catch (error) {

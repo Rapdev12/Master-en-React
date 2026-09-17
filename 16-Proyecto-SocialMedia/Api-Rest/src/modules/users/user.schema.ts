@@ -18,17 +18,15 @@ export const createUserSchema = z.object({
       .string({ error: "The password is required." })
       .min(8, "The password must be at least 8 characters long."),
 
-    image: z.url("The image must be a valid URL.").optional(),
-
     displayName: z
-    .string()
-    .max(20, "The name cannot exceed 20 characters.")
-    .optional(),
+      .string()
+      .max(20, "The name cannot exceed 20 characters.")
+      .optional(),
 
     biography: z
-    .string()
-    .max(150, "The biography cannot exceed 150 characters.")
-    .optional(),
+      .string()
+      .max(150, "The biography cannot exceed 150 characters.")
+      .optional(),
   }),
 });
 export const getUserByIdSchema = z.object({
@@ -40,7 +38,6 @@ export const getUserByIdSchema = z.object({
 export const updateUserSchema = z.object({
   body: createUserSchema.shape.body.partial(),
 });
-
 
 // Ventaja: si mañana cambiás una regla acá, el tipo se actualiza solo.
 export type CreateUserInput = z.infer<typeof createUserSchema>["body"];

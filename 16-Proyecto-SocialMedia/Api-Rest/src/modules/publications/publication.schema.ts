@@ -6,8 +6,7 @@ export const createPublicationSchema = z.object({
       .string()
       .max(350, "It is the maximum number of characters.")
       .optional(),
-    //Change the URL when Multer is ready.
-    file: z.url("Change the URL when Multer is ready.").optional(),
+      
   }),
 });
 

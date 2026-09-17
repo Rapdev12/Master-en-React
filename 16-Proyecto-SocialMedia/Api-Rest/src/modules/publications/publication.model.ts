@@ -3,7 +3,7 @@ import { Schema, model, Document, Types } from "mongoose";
 export interface IPublication extends Document {
   _id: Types.ObjectId;
   description?: string;
-  file?: string; // opcional, no todos suben foto;
+  file?: string []; // opcional, no todos suben foto;
   created_at: Date;
   user: Types.ObjectId;
 }
@@ -21,8 +21,8 @@ const PublicationSchema = new Schema<IPublication>(
     },
 
     file: {
-      type: String,
-      default: null,
+      type: [String],
+      default: [],
     },
   },
   {
