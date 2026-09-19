@@ -20,7 +20,7 @@ export const followServices = {
       throw new AppError("Follow Error", 404);
     }
 
-    return { mensaje: "Deleted Follow" };
+    return { message: "Deleted Follow" };
   },
 
   async getFollowing(user: string) {

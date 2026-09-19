@@ -6,7 +6,7 @@ export const createUserSchema = z.object({
     name: z
       .string({ error: "The name is mandatory." }) //si falta el campo o no es un string
       .trim() //borrar espacios en blanco al principio/final antes de validar
-      .min(1, "El nombre no puede estar vacío"),
+      .min(1, "The name cannot be empty."),
 
     nick: z
       .string({ error: "The nickname is mandatory." })

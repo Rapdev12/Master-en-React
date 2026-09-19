@@ -61,7 +61,7 @@ export const userService = {
       throw new AppError("User not found", 404);
     }
 
-    return { mensaje: "Deleted user" };
+    return { message: "Deleted user" };
   },
 
   async userUpdate(id: string, data: UpdateUserInput) {

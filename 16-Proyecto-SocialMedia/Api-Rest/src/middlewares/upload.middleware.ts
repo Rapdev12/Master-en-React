@@ -8,6 +8,7 @@ import { Request } from "express";
 const storage = multer.diskStorage({
   // destination decide en qué carpeta física cae el archivo
   destination: (req, file, cb) => {
+    
     // __dirname acá apunta a src/middlewares/, así que subimos 2 niveles
     // (middlewares -> src -> raíz del proyecto) para llegar a uploads/
     const uploadPath = path.join(__dirname, "../../uploads");
@@ -16,6 +17,7 @@ const storage = multer.diskStorage({
 
   // filename decide con qué NOMBRE se guarda el archivo dentro de esa carpeta
   filename: (req, file, cb) => {
+     console.log("ENTRÓ A FILENAME");
     // conservamos la extensión original (.jpg, .png, etc.) para que el archivo
     // siga siendo válido/reconocible al abrirlo
     const ext = path.extname(file.originalname);
@@ -30,6 +32,7 @@ const storage = multer.diskStorage({
 
 const fileFilter = (_req : Request, file: Express.Multer.File, cb: FileFilterCallback ) => {
     if (file.mimetype.startsWith("image/")){
+      console.log("ENTRÓ A FILEFILTER", file.mimetype);
         cb (null, true);
     }else {
         cb(new Error("It is not compatible with the image format."))
