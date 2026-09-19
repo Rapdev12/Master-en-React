@@ -1,0 +1,65 @@
+/* src/components/Button.module.css */
+
+/* 1. Estilo base común a TODOS los botones (geometría, tipografía y animación) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* Espacio automático si metemos un ícono junto al texto */
+  padding: 0.55rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px; /* Bordes suaves modernos */
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+}
+
+/* Microinteracción: se comprime ligeramente al hacer clic (efecto táctil) */
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* 2. Variante PRINCIPAL (para el botón [+ Crear], Publicar, etc.) */
+.primary {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.primary:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* 3. Variante SECUNDARIA (más sutil, para acciones neutras) */
+.secondary {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+.secondary:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+/* 4. Variante CONTORNO (fondo transparente con borde sutil) */
+.outline {
+  background-color: transparent;
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+.outline:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  color: #1e293b;
+}
+
+/* Estado deshabilitado (por ejemplo, mientras carga una publicación) */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}

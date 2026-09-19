@@ -3,45 +3,46 @@ pnpm create vite red-social --template react-ts
 
 # Estructura de mi Front
 red-social/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── hooks/
-│   ├── types/
-│   │   └── index.ts       ← Aquí defines tus interfaces
-│   ├── App.tsx            ← Nota la extensión .tsx
+red-social/
+├── 📁 src/
+│   ├── 📁 components/       <-- Átomos y piezas reutilizables
+│   │   ├── 📁 Button/
+│   │   │   ├── Button.tsx
+│   │   │   └── Button.module.css
+│   │   └── 📁 Card/
+│   │       ├── Card.tsx
+│   │       └── Card.module.css
+│   │
+│   ├── 📁 layout/           <-- Estructura visual estática
+│   │   ├── 📁 Header/
+│   │   │   ├── Header.tsx
+│   │   │   └── Header.module.css
+│   │   ├── 📁 Footer/
+│   │   │   ├── Footer.tsx
+│   │   │   └── Footer.module.css
+│   │   └── 📁 MainLayout/
+│   │       ├── MainLayout.tsx
+│   │       └── MainLayout.module.css
+│   │
+│   ├── 📁 pages/            <-- Vistas asociadas a rutas
+│   │   ├── 📁 Home/
+│   │   │   ├── Home.tsx
+│   │   │   └── Home.module.css
+│   │   └── 📁 Contact/
+│   │       ├── Contact.tsx
+│   │       └── Contact.module.css
+│   │
+│   ├── 📁 hooks/            <-- Custom hooks (ej. useAuth.ts, useFetch.ts)
+│   ├── 📁 routes/           <-- Definición de navegación (AppRoutes.tsx)
+│   ├── 📁 types/            <-- Definición de interfaces/tipos
+│   │   └── index.ts
+│   │
+│   ├── App.tsx
 │   ├── main.tsx
 │   └── vite-env.d.ts
-├── tsconfig.json          ← Configuración de TypeScript
-├── tsconfig.node.json
+│
 ├── package.json
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
 └── vite.config.ts
-
-
-# Configuración Recomendada para tsconfig.json
-
-{
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
-  },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
-}
