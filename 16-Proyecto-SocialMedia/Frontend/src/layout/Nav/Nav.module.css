@@ -80,3 +80,132 @@
 .loginLink:hover {
   background-color: #2563eb;
 }
+
+/* Contenedor relativo para posicionar el dropdown */
+.userMenu {
+  position: relative;
+  display: inline-block;
+}
+
+/* Botón de usuario */
+.userTrigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.35rem 0.6rem;
+  border-radius: 9999px; /* Forma de píldora */
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.userTrigger:hover {
+  background: rgba(0, 169, 244, 0.08); /* Fondo sutil con el azul */
+  border-color: rgba(0, 169, 244, 0.2);
+}
+
+/* Avatar circular */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--bubble-blue), var(--web-orange));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* El desplegable (Dropdown) */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: #ffffff;
+  min-width: 170px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0.5rem;
+  list-style: none;
+  z-index: 50;
+
+  /* Oculto por defecto */
+  display: none;
+}
+.dropdown::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+/* Mostrar al hacer hover en el contenedor */
+.userMenu:hover .dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  animation: fadeIn 0.15s ease-out;
+}
+
+/* Elementos dentro del dropdown */
+.dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  text-decoration: none;
+  text-align: left;
+  border-radius: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s ease;
+}
+
+.dropdownItem:hover {
+  background: #f3f4f6;
+  color: var(--bubble-blue);
+}
+
+/* Separador visual */
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 0.25rem 0;
+}
+
+/* Estilo especial para Cerrar Sesión con el rojo del logo */
+.logoutButton {
+  color: var(--web-red);
+  font-weight: 600;
+}
+
+.logoutButton:hover {
+  background: rgba(245, 45, 45, 0.08);
+  color: var(--web-red);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

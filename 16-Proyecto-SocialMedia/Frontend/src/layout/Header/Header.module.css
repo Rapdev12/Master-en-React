@@ -27,13 +27,18 @@
 }
 
 .title {
-  font-size: 1.35rem;
+  font-size: 1.6rem;
   font-weight: 800;
-  background: var(--brand-gradient);
+}
+.bubble {
+  color: var(--bubble-blue);
+}
+.web {
+  background: linear-gradient(120deg, var(--web-orange), var(--web-red));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-
 /* Columna 2: Búsqueda */
 .searchBar {
   display: flex;

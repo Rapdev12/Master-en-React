@@ -1,20 +1,23 @@
 /* 1. Importamos la fuente moderna desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
 /* 2. Definimos las variables de color Bilibili + Weibo */
 :root {
-  --primary-blue: #00aeec;
-  --primary-blue-hover: #0092c6;
-  --bubble-pink: #fb7299;
-  --accent-orange: #ff5a36;
-  --accent-orange-hover: #e04522;
-  --brand-gradient: linear-gradient(135deg, #00aeec 0%, #fb7299 100%);
-  --bg-app: #f4f5f7;
+  /* 🎨 Paleta BubbleWeb (extraída del Logo) */
+  --bubble-blue: #00a9f4;
+  --bubble-blue-dark: #0088f7;
+  --web-orange: #ff9d00;
+  --web-red: #f52d2d;
+
+  /* Degradados del logo para títulos o botones especiales */
+  --gradient-brand: linear-gradient(135deg, #00a1d6 0%, #ff4b4b 100%);
+  --gradient-accent: linear-gradient(135deg, #ff7a00 0%, #ff4b4b 100%);
+  /* Neutros y superficies */
+  --bg-main: #f4f6f9;
   --bg-card: #ffffff;
-  --text-primary: #18191c;
-  --text-secondary: #61666d;
-  --text-muted: #9499a0;
-  --border-light: #e3e5e7;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
 }
 
 /* 3. Reset y tipografía global */
@@ -24,12 +27,14 @@
   padding: 0;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   width: 100%;
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   background-color: var(--bg-app);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
