@@ -1,6 +1,6 @@
 import styles from './Nav.module.css';
-
 import type { User } from '../../types/index';
+import { NavLink } from 'react-router-dom';
 
 
 interface NavProps {
@@ -13,8 +13,8 @@ function Nav({ user }: NavProps) {
     return (
         <nav className={styles.nav}>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#mis-publicaciones">Mis publicaciones</a>
+                <li><NavLink to="/home">Home</NavLink></li>
+                <li><NavLink to="/mypost"> Mis publicaciones</NavLink>
                     <ul className={styles.submenu}>
                         <li><a href="#publicadas">Crear</a></li>
                         <li><a href="#borradores">Ver mis publicaciones</a></li>

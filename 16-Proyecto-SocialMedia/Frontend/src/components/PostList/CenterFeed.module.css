@@ -1,0 +1,19 @@
+/* Columna Central (Feed principal) */
+.centerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0; /* Evita desbordamiento con textos largos */
+}
+
+
+/* Placeholders provisionales para el centro */
+.createPostPlaceholder,
+.postsContainer {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 1.5rem;
+  border: 1px dashed #cbd5e1;
+  text-align: center;
+  color: #64748b;
+}
