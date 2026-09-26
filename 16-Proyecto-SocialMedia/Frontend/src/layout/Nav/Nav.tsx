@@ -66,9 +66,8 @@ function Nav({ user }: NavProps) {
                             </ul>
                         </div>
                     ) : (
-                        <a href="#login" className={styles.loginLink}>
-                            Login
-                        </a>
+                        <NavLink to ="/login" className={styles.loginLink}> login </NavLink>  
+                        
                     )}
                 </li>
             </ul>

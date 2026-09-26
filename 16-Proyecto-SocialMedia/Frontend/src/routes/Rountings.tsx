@@ -2,6 +2,8 @@ import MainLayout from "../layout/MainLayout";
 import { Home } from "../pages/Home/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MyPosts } from "../pages/Publication/Mypost";
+import { Login } from "../pages/Login/Login";
+import { Register } from "../pages/Register/Register";
 
 
 
@@ -15,6 +17,8 @@ function Routings() {
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/mypost" element={<MyPosts/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
         </Route>
 
         <Route path="*" element={
