@@ -1,60 +1,58 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '../../services/authService';
 import styles from './Login.module.css';
 
 export const Login: React.FC = () => {
-  // 2. ESTADOS LOCALES (Controlled Components)
-  // Guardan en tiempo real el valor ingresado en cada campo del formulario.
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
-  // Hook de React Router DOM para redirigir al usuario tras una acción.
+  const [nick, setNick] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // 3. MANEJADOR DEL ENVÍO (Submit Event)  
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.SyntheticEvent) => {
+  e.preventDefault();
 
-    // Validación básica: asegura que los campos no contengan solo espacios en blanco.
-    if (!email.trim() || !password.trim()) {
-      alert('Por favor, completa todos los campos.');
-      return;
-    }
+  if (!nick.trim() || !password.trim()) {
+    alert('Por favor, completa todos los campos.');
+    return;
+  }
 
-    // [SIMULACIÓN FRONTEND]: Aquí irá la petición 'fetch' a la API REST cuando conectemos el backend.
-    console.log('Iniciando sesión con:', { email, password });
+  setLoading(true);
 
-    // Redirige automáticamente a la pantalla principal del feed.
+  const response = await loginUser(nick, password);
+  setLoading(false);
+
+  // Verificamos la propiedad "token" que nos confirma Bruno
+  if (response && response.token) {
+    localStorage.setItem('token', String(response.token));
+    alert('¡Bienvenido!');
     navigate('/home');
-  };
+  } else {
+    alert((response?.message as string) || 'Error al iniciar sesión');
+  }
+};
 
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        
-        {/* Encabezado visual del formulario */}
         <div className={styles.header}>
           <h2>🫧 Bienvenid@ a BubbleWeb</h2>
           <p>Ingresa tus datos para acceder a tu cuenta</p>
         </div>
 
-        {/* Formulario controlado */}
         <form onSubmit={handleSubmit} className={styles.form}>
-          
-          {/* Campo: Email */}
           <div className={styles.inputGroup}>
-            <label htmlFor="email">Correo electrónico</label>
+            <label htmlFor="nick">Usuario / Nick</label>
             <input
-              type="email"
-              id="email"
-              value={email} // Enlace bidireccional (El estado dicta el valor del input)
-              onChange={(e) => setEmail(e.target.value)} // Evento que actualiza el estado
-              placeholder="tu.usuario@ejemplo.com"
+              type="text"
+              id="nick"
+              value={nick}
+              onChange={(e) => setNick(e.target.value)}
+              placeholder="Ej. alex_dev"
               required
             />
           </div>
 
-          {/* Campo: Contraseña */}
           <div className={styles.inputGroup}>
             <label htmlFor="password">Contraseña</label>
             <input
@@ -67,13 +65,11 @@ export const Login: React.FC = () => {
             />
           </div>
 
-          {/* Botón de envío que dispara el evento 'onSubmit' del formulario */}
-          <button type="submit" className={styles.submitBtn}>
-            Iniciar Sesión
+          <button type="submit" className={styles.submitBtn} disabled={loading}>
+            {loading ? 'Cargando...' : 'Iniciar Sesión'}
           </button>
         </form>
 
-        {/* Pie de página con enlace hacia la vista de Registro */}
         <div className={styles.footer}>
           <p>
             ¿No tienes una cuenta?{' '}
@@ -82,7 +78,6 @@ export const Login: React.FC = () => {
             </Link>
           </p>
         </div>
-
       </div>
     </div>
   );

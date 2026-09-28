@@ -5,7 +5,6 @@ export interface User {
   _id: string;
   name: string;
   nick: string;
-  email: string;
   bio?: string;
   image?: string;
   created_at?: string;

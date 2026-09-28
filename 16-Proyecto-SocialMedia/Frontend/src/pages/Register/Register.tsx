@@ -1,38 +1,48 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { registerUser } from '../../services/authService';
 import styles from './Register.module.css';
 
 export const Register: React.FC = () => {
-  // 1. Estados locales para cada campo del formulario
-  const [username, setUsername] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [name, setName] = useState('');
+  const [nick, setNick] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  // 2. Manejador del evento de envío usando React.SyntheticEvent
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+  e.preventDefault();
 
-    // Validar que los campos no estén vacíos
-    if (!username.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
-      alert('Por favor, completa todos los campos.');
-      return;
-    }
+  if (!name.trim() || !nick.trim() || !password.trim() || !confirmPassword.trim()) {
+    alert('Por favor, completa todos los campos.');
+    return;
+  }
 
-    // Validar que las contraseñas coincidan
-    if (password !== confirmPassword) {
-      alert('Las contraseñas no coinciden. Por favor, verifícalas.');
-      return;
-    }
+  if (password.length < 8) {
+    alert('La contraseña debe tener al menos 8 caracteres.');
+    return;
+  }
 
-    // [SIMULACIÓN FRONTEND]: Aquí se enviará la petición POST a la API REST de registro
-    console.log('Usuario registrado con éxito:', { username, email, password });
+  if (password !== confirmPassword) {
+    alert('Las contraseñas no coinciden. Por favor, verifícalas.');
+    return;
+  }
 
-    alert('¡Cuenta creada exitosamente! Redirigiendo al inicio de sesión...');
+  setLoading(true);
+
+  const response = await registerUser({ name, nick, password });
+  setLoading(false);
+
+  // Verificamos si creó el usuario comprobando que devuelva su _id o nick
+  if (response && (response._id || response.nick)) {
+    alert('¡Cuenta creada con éxito! Ahora puedes iniciar sesión.');
     navigate('/login');
-  };
+  } else {
+    alert((response?.message as string) || 'Error al registrar el usuario');
+  }
+};
 
   return (
     <div className={styles.container}>
@@ -43,33 +53,30 @@ export const Register: React.FC = () => {
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          {/* Nombre de usuario */}
           <div className={styles.inputGroup}>
-            <label htmlFor="username">Nombre de usuario</label>
+            <label htmlFor="name">Nombre real</label>
             <input
               type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Ej. Alexander Ruiz"
+              required
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label htmlFor="nick">Usuario / Nick</label>
+            <input
+              type="text"
+              id="nick"
+              value={nick}
+              onChange={(e) => setNick(e.target.value)}
               placeholder="Ej. alex_dev"
               required
             />
           </div>
 
-          {/* Correo electrónico */}
-          <div className={styles.inputGroup}>
-            <label htmlFor="email">Correo electrónico</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="tu.usuario@ejemplo.com"
-              required
-            />
-          </div>
-
-          {/* Contraseña */}
           <div className={styles.inputGroup}>
             <label htmlFor="password">Contraseña</label>
             <input
@@ -82,7 +89,6 @@ export const Register: React.FC = () => {
             />
           </div>
 
-          {/* Confirmar contraseña */}
           <div className={styles.inputGroup}>
             <label htmlFor="confirmPassword">Confirmar Contraseña</label>
             <input
@@ -95,8 +101,8 @@ export const Register: React.FC = () => {
             />
           </div>
 
-          <button type="submit" className={styles.submitBtn}>
-            Registrarse
+          <button type="submit" className={styles.submitBtn} disabled={loading}>
+            {loading ? 'Creando cuenta...' : 'Registrarse'}
           </button>
         </form>
 
