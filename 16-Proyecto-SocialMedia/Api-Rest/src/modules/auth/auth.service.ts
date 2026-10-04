@@ -23,13 +23,24 @@ export const authServices = {
     // - payload: lo que armamos arriba
     // - process.env.JWT_SECRET: el secret que pusiste en .env
     // - expiresIn: "45m" → después de 45 min, el token deja de ser válido
-    const token = jwt.sign(
-      payload,
-      process.env.JWT_SECRET as string,
-      { expiresIn: "45m" }
-    );
+    const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
+      expiresIn: "45m",
+    });
 
     // Devolvemos el token al controller, que después lo devuelve al cliente
-    return { token };
-},
+    return {
+      status: "success",          // 👈 añádelo: así el frontend puede comprobarlo
+  token,
+  user: {
+    _id: existingUser._id,
+    name: existingUser.name,
+    nick: existingUser.nick,
+    role: existingUser.role,
+    image: existingUser.image,
+    displayName: existingUser.displayName,
+    biography: existingUser.biography,
+    created_at: existingUser.created_at
+    },
+  };
+}
 }

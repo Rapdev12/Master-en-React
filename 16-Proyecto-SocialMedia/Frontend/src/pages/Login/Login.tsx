@@ -2,35 +2,46 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../services/authService';
 import styles from './Login.module.css';
+import type { User } from '../../types';
+import { useAuth } from '../../context/useAuth';
 
-export const Login: React.FC = () => {
+
+
+export const Login = () => {
   const [nick, setNick] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-const handleSubmit = async (e: React.SyntheticEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
 
-  if (!nick.trim() || !password.trim()) {
-    alert('Por favor, completa todos los campos.');
-    return;
-  }
+    if (!nick.trim() || !password.trim()) {
+      alert('Por favor, completa todos los campos.');
+      return;
+    }
 
-  setLoading(true);
+    setLoading(true);                              // 👈 botón en "Cargando..."
+    try {
+      const data = await loginUser(nick.trim(), password);
+      console.log('RESPUESTA LOGIN:', data);
 
-  const response = await loginUser(nick, password);
-  setLoading(false);
+      if (!data?.token) {
+        alert(data?.message ?? 'Usuario o contraseña incorrectos');
+        return;
+      }
 
-  // Verificamos la propiedad "token" que nos confirma Bruno
-  if (response && response.token) {
-    localStorage.setItem('token', String(response.token));
-    alert('¡Bienvenido!');
-    navigate('/home');
-  } else {
-    alert((response?.message as string) || 'Error al iniciar sesión');
-  }
-};
+      const user: User = data.user ?? { nick: nick.trim().toLowerCase() };
+      login(data.token, user);
+      navigate('/home', { replace: true });
+    } catch (error) {
+      console.error('Error en el login:', error);
+      alert('No se pudo conectar con el servidor.');
+    } finally {
+      setLoading(false);                           // 👈 siempre vuelve a habilitarse
+    }
+  };
 
   return (
     <div className={styles.container}>

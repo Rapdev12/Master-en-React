@@ -1,77 +1,82 @@
 import styles from './Nav.module.css';
-import type { User } from '../../types/index';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/useAuth';
 
+export const Nav = () => {
+  const { isAuth, user, logout } = useAuth();
+  const navigate = useNavigate();
 
-interface NavProps {
-    user?: User;
-}
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
-function Nav({ user }: NavProps) {
+  return (
+    <nav className={styles.nav}>
+      <ul>
+        <li>
+          <NavLink to="/home">Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/mypost">Mis publicaciones</NavLink>
+          <ul className={styles.submenu}>
+            <li><a href="#publicadas">Crear</a></li>
+            <li><a href="#borradores">Ver mis publicaciones</a></li>
+          </ul>
+        </li>
+        <li>
+          {isAuth && user ? (
+            <div className={styles.userMenu}>
+              <button
+                type="button"
+                className={styles.userTrigger}
+                aria-haspopup="true"
+              >
+                <span className={styles.avatar}>
+                  {user.image ? (
+                    <img src={user.image} alt={user.name || user.nick} />
+                  ) : (
+                    (user.name || user.nick || 'U').charAt(0).toUpperCase()
+                  )}
+                </span>
+                <span className={styles.userName}>
+                  {user.name || `@${user.nick}`}
+                </span>
+                <span className={styles.arrow}>▾</span>
+              </button>
 
-
-    return (
-        <nav className={styles.nav}>
-            <ul>
-                <li><NavLink to="/home">Home</NavLink></li>
-                <li><NavLink to="/mypost"> Mis publicaciones</NavLink>
-                    <ul className={styles.submenu}>
-                        <li><a href="#publicadas">Crear</a></li>
-                        <li><a href="#borradores">Ver mis publicaciones</a></li>
-                    </ul>
+              <ul className={styles.dropdown}>
+                <li>
+                  <a href="#perfil" className={styles.dropdownItem}>
+                    Mi perfil
+                  </a>
                 </li>
                 <li>
-                    {user ? (
-                        <div className={styles.userMenu}>
-                            {/* Botón o trigger que muestra el avatar/nombre y una flechita */}
-                            <button
-                                type="button"
-                                className={styles.userTrigger}
-                                aria-haspopup="true"
-                            >
-                                {/* Si el usuario tiene avatar lo mostramos, si no una inicial */}
-                                <span className={styles.avatar}>
-                                    {user.image ? (
-                                        <img src={user.image} alt={user.name} />
-                                    ) : (
-                                        user.name.charAt(0).toUpperCase()
-                                    )}
-                                </span>
-                                <span className={styles.userName}>{user.name}</span>
-                                <span className={styles.arrow}>▾</span>
-                            </button>
-                            {/* Submenú desplegable */}
-                            <ul className={styles.dropdown}>
-                                <li>
-                                    <a href="#perfil" className={styles.dropdownItem}>
-                                        Mi perfil
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#configuracion" className={styles.dropdownItem}>
-                                        Ajustes
-                                    </a>
-                                </li>
-                                <li className={styles.divider}></li>
-                                <li>
-                                    {/* Acción de Cerrar Sesión */}
-                                    <button
-                                        type="button"
-                                        className={`${styles.dropdownItem} ${styles.logoutButton}`}
-                                        onClick={() => console.log('Cerrar sesión')}
-                                    >
-                                        Cerrar sesión
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    ) : (
-                        <NavLink to ="/login" className={styles.loginLink}> login </NavLink>  
-                        
-                    )}
+                  <a href="#configuracion" className={styles.dropdownItem}>
+                    Ajustes
+                  </a>
                 </li>
-            </ul>
-        </nav >
-    );
+                <li className={styles.divider}></li>
+                <li>
+                  <button
+                    type="button"
+                    className={`${styles.dropdownItem} ${styles.logoutButton}`}
+                    onClick={handleLogout}
+                  >
+                    Cerrar sesión
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <NavLink to="/login" className={styles.loginLink}>
+              login
+            </NavLink>
+          )}
+        </li>
+      </ul>
+    </nav>
+  );
 };
+
 export default Nav;

@@ -1,20 +1,24 @@
 import styles from './Home.module.css';
-import {LeftSidebar} from '../../components/Aside/LeftSidebar'
+import { useState } from 'react';
+import { Navigate } from 'react-router-dom';            // 👈
+import { LeftSidebar } from '../../components/Aside/LeftSidebar';
 import { RighSidebar } from '../../components/Aside/RightSidebar';
-import  {CenterFeed}  from '../../components/PostList/CenterFeed';
-import  { useState } from 'react';
-import { initialPosts, currentUser } from '../../data/data';
+import { CenterFeed } from '../../components/PostList/CenterFeed';
+import { initialPosts } from '../../data/data';          // 👈 ya NO importes currentUser
+import { useAuth } from '../../context/useAuth';         // 👈
 import type { Publication } from '../../types';
 
-
 export const Home = () => {
-
+  const { user } = useAuth();                            // 👈 el usuario real del login
   const [posts, setPosts] = useState<Publication[]>(initialPosts);
+
+  // Si no hay sesión, al login (protege la ruta sin depender solo del guard)
+  if (!user) return <Navigate to="/login" replace />;
 
   const handlePostCreate = (text: string) => {
     const newPost: Publication = {
       _id: `post-${Date.now()}`,
-      user: currentUser,
+      user,                                              // 👈 el autor real
       text,
       created_at: 'Justo ahora'
     };
@@ -22,21 +26,14 @@ export const Home = () => {
   };
 
   return (
-
     <div className={styles.container}>
-      {/* 1. Columna Izquierda: Accesos directos */}
-      <LeftSidebar/>
-
-      {/* 2. Columna Central: Feed */}
-      
-      <CenterFeed 
-        posts={posts} 
-        currentUser={currentUser} 
-        onPostCreate={handlePostCreate} 
+      <LeftSidebar />
+      <CenterFeed
+        posts={posts}
+        currentUser={user}                               // 👈 el usuario real
+        onPostCreate={handlePostCreate}
       />
-
-      {/* 3. Columna Derecha: Widgets / Tendencias */}
-      <RighSidebar/>
+      <RighSidebar />
     </div>
   );
 };

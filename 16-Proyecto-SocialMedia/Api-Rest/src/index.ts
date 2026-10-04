@@ -11,7 +11,12 @@ import publicationRouter from "./modules/publications/publication.route"
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+// Habilitar CORS para tu frontend
+app.use(cors({
+  origin: '*', // En desarrollo puedes usar '*' o especificar 'http://localhost:5173'
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,21 +1,27 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 import { LeftSidebar } from '../../components/Aside/LeftSidebar';
-
 import { PostCard } from '../../components/PostCard/PostCard';
-import { initialPosts, currentUser } from '../../data/data'; // Ajusta la ruta a tu carpeta data
-import styles from './MyPosts.module.css';
+import { initialPosts } from '../../data/data';          // 👈 SOLO initialPosts
 import { RighSidebar } from '../../components/Aside/RightSidebar';
+import { useAuth } from '../../context/useAuth';         // 👈 el usuario real
+import styles from './MyPosts.module.css';
 
 export const MyPosts: React.FC = () => {
-  // 1. Filtramos los posts para obtener solo los del usuario actual
-  const myPosts = initialPosts.filter((post) => post.user._id === currentUser._id);
+  const { user } = useAuth();
+
+  // Sin sesión no se entra aquí
+  if (!user) return <Navigate to="/login" replace />;
+
+  // 1. Filtramos por el usuario logueado (por _id si existe, si no por nick)
+  const myPosts = initialPosts.filter((post) =>
+    user._id ? post.user._id === user._id : post.user.nick === user.nick
+  );
 
   return (
     <div className={styles.homeGrid}>
-      {/* Columna Izquierda */}
       <LeftSidebar />
 
-      {/* Columna Central: Mis Publicaciones */}
       <main className={styles.centerColumn}>
         <div className={styles.headerTitle}>
           <h2>✍️ Mis Publicaciones</h2>
@@ -35,7 +41,6 @@ export const MyPosts: React.FC = () => {
         </div>
       </main>
 
-      {/* Columna Derecha */}
       <RighSidebar />
     </div>
   );

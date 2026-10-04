@@ -36,7 +36,7 @@ export const CreatePost: React.FC<CreatePostProps> = ({ user, onPostCreate }) =>
         
         {/* Vincula este textarea con tu estado local "content" */}
         <textarea
-          placeholder={`¿Qué estás pensando${user?.name ? `, ${user.name}` : ''}?`}
+          placeholder={`¿Qué estás pensando${user ? `, ${user.displayName || user.name || user.nick}` : ''}?`}
           value={content}
           onChange={(e) => setContent(e.target.value)}
           className={styles.textarea}
