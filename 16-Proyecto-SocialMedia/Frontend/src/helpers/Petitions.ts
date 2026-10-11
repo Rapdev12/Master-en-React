@@ -1,54 +1,45 @@
+// hooks/petitions.ts
+export interface PetitionResponse<T> {
+  ok: boolean;
+  information: T | null;
+  error: string | null;
+}
+
 export const Petitions = async <T = Record<string, unknown>>(
   newurl: string,
-  metodo: string,
-  saveData: BodyInit | Record<string, unknown> | null = null, //Simplemente le indica a TypeScript que los datos
-  //del formulario pueden venir como un objeto JSON estándar
-  // o como un objeto FormData para archivos, evitando errores de tipado sin necesidad de usar any.
+  metodo: "GET" | "POST" | "PUT" | "DELETE" = "GET",
+  saveData: BodyInit | Record<string, unknown> | null = null,
   files: boolean = false,
-) => {
-  let information: T | null = null;
-
+): Promise<PetitionResponse<T>> => {
   try {
-    let options: RequestInit = {
-      method: "GET",
+    // 🔑 El token SIEMPRE va, sin importar el método
+    const headers: Record<string, string> = {
+      Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
     };
 
-    if (metodo === "GET" || metodo === "DELETE") {
-      options = {
-        method: metodo,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`, // 👈 añadir
-        },
-      };
-    }
+    let body: BodyInit | undefined;
 
     if (metodo === "POST" || metodo === "PUT") {
-      const body = files ? (saveData as BodyInit) : JSON.stringify(saveData);
-
       if (files) {
-        options = {
-          method: metodo,
-          body,
-        };
+        body = saveData as BodyInit;            // FormData: no tocar Content-Type
       } else {
-        options = {
-          method: metodo,
-          body,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
+        headers["Content-Type"] = "application/json";
+        body = JSON.stringify(saveData);
       }
     }
 
-    const petition = await fetch(newurl, options);
-    information = (await petition.json()) as T;
+    const petition = await fetch(newurl, { method: metodo, headers, body });
+    const data = (await petition.json()) as T;
+
+    if (!petition.ok) {
+      const message =
+        (data as { message?: string })?.message ?? `Error ${petition.status}`;
+      return { ok: false, information: null, error: message };
+    }
+
+    return { ok: true, information: data, error: null };
   } catch (error) {
     console.error("Error:", error);
+    return { ok: false, information: null, error: "Error de conexión" };
   }
-
-  return {
-    information,
-  };
 };

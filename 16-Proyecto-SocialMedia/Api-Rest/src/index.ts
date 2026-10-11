@@ -5,8 +5,9 @@ import cors from "cors";
 import userRoutes from "./modules/users/user.routes";
 import { AppError } from "./shared/Error/AppError";
 import authRouter from './modules/auth/auth.routes';
-import followRouter from "./modules/follows/follow.route"
-import publicationRouter from "./modules/publications/publication.route"
+import followRouter from "./modules/follows/follow.route";
+import publicationRouter from "./modules/publications/publication.route";
+import path from 'path';
 
 const app = express();
 const PORT = 3000;
@@ -19,6 +20,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Alternativa robusta — siempre encuentra uploads sin importar dónde estés
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+
 
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRouter);

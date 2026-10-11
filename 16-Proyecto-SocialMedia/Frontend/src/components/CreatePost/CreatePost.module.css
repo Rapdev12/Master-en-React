@@ -71,3 +71,41 @@
   cursor: not-allowed;
   opacity: 0.7;
 }
+
+/* 🔄 NUEVO: label que hace de botón para subir imágenes */
+.fileLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #334155;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.15s;
+}
+.fileLabel:hover {
+  background: #e2e8f0;
+}
+
+/* 🔄 Ocultamos el input real pero mantenemos el label clickable */
+.fileInput {
+  display: none;
+}
+
+/* 🔄 NUEVO: previsualización de nombres de archivo */
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.fileChip {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}

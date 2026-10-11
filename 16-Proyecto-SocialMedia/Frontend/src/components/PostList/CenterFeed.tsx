@@ -7,7 +7,7 @@ import styles from './CenterFeed.module.css';
 interface CenterFeedProps {
   posts: Publication[];
   currentUser?: User;                                    // 👈 restaurar la prop
-  onPostCreate: (content: string) => void;
+  onPostCreate: (content: string, files?: File[]) => void;
 }
 
 export const CenterFeed: React.FC<CenterFeedProps> = ({
