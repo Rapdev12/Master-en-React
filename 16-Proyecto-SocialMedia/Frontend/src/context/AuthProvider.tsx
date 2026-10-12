@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsAuth(false);
   };
   // en AuthProvider, justo antes del return:
-console.log('PROVIDER render → user:', user);
+
   return (
     <AuthContext.Provider value={{ token, user, isAuth, login, logout }}>
       {children}

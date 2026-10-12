@@ -21,7 +21,7 @@ export const Petitions = async <T = Record<string, unknown>>(
 
     if (metodo === "POST" || metodo === "PUT") {
       if (files) {
-        body = saveData as BodyInit;            // FormData: no tocar Content-Type
+        body = saveData as BodyInit; // FormData: no tocar Content-Type
       } else {
         headers["Content-Type"] = "application/json";
         body = JSON.stringify(saveData);
@@ -31,6 +31,17 @@ export const Petitions = async <T = Record<string, unknown>>(
     const petition = await fetch(newurl, { method: metodo, headers, body });
     const data = (await petition.json()) as T;
 
+    if (petition.status === 401) {
+      const hadToken = !!localStorage.getItem("token");
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      if (hadToken && !window.location.pathname.startsWith("/login")) {
+        window.location.href = "/login";
+        return { ok: false, information: null, error: "Sesión expirada" };
+      }
+    }
     if (!petition.ok) {
       const message =
         (data as { message?: string })?.message ?? `Error ${petition.status}`;

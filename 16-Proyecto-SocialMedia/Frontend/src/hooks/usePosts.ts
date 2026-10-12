@@ -1,29 +1,43 @@
-// hooks/usePosts.ts
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   getPublications,
+  getPublicationsByUser,      // ✅ NUEVO
   createPublication,
   deletePublication,
 } from "../services/postService";
 import type { Publication } from "../types";
 
-export function usePosts() {
+// ✅ NUEVO: helper para ordenar por fecha descendente (más nuevos primero).
+//    El backend devuelve ascendente → reordenamos acá.
+const sortByNewest = (list: Publication[]): Publication[] =>
+  [...list].sort(
+    (a, b) =>
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  );
+
+// 🔄 ahora acepta userId opcional:
+//    usePosts()          → feed global (Home)
+//    usePosts(user._id)  → solo los posts del usuario (MyPosts)
+export function usePosts(userId?: string) {
   const [posts, setPosts] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // ─────────────────────────────────────────────────────────
-  // Carga inicial — fetch DENTRO del effect (no en una función externa)
-  // Así el linter ve que setState va después del await → sin warning
-  // ─────────────────────────────────────────────────────────
+  // ✅ NUEVO: función común → elige endpoint según haya userId o no.
+  //    useCallback evita que el useEffect de abajo se re-dispare en cada render.
+  const fetchPosts = useCallback(
+    () => (userId ? getPublicationsByUser(userId) : getPublications()),
+    [userId]
+  );
+
   useEffect(() => {
-    let ignore = false;    // 👈 por si el componente se desmonta antes de recibir
+    let ignore = false;
 
     (async () => {
       try {
-        const data = await getPublications();
-        if (ignore) return;                // 👈 no setState si ya se desmontó
-        setPosts(data);
+        const data = await fetchPosts();            // 🔄 antes: getPublications()
+        if (ignore) return;
+        setPosts(sortByNewest(data));               // 🔄 orden descendente
         setError(null);
       } catch (e) {
         if (ignore) return;
@@ -34,34 +48,25 @@ export function usePosts() {
     })();
 
     return () => {
-      ignore = true;       // 👈 cleanup: si el componente se va, ignoramos la respuesta
+      ignore = true;
     };
-  }, []);                  // 👈 dependencias vacías: solo corre al montar
+  }, [fetchPosts]);                                 // 🔄 dep = fetchPosts (cambia si cambia userId)
 
-  // ─────────────────────────────────────────────────────────
-  // addPost — crear publicación
-  // ─────────────────────────────────────────────────────────
   const addPost = async (text: string, files: File[] = []) => {
-  const newPost = await createPublication(text, files);  // 🔄 pasa los files
-  setPosts((prev) => [newPost, ...prev]);
-};
+    const newPost = await createPublication(text, files);
+    setPosts((prev) => sortByNewest([newPost, ...prev]));   // 🔄 mantiene orden
+  };
 
-  // ─────────────────────────────────────────────────────────
-  // removePost — borrar publicación
-  // ─────────────────────────────────────────────────────────
   const removePost = async (id: string) => {
     await deletePublication(id);
     setPosts((prev) => prev.filter((p) => p._id !== id));
   };
 
-  // ✅ Recarga manual (para botones "refrescar")
-  // No da warning porque NO se llama desde un useEffect,
-  // solo desde eventos onClick u otros handlers.
   const reload = async () => {
     setLoading(true);
     try {
-      const data = await getPublications();
-      setPosts(data);
+      const data = await fetchPosts();              // 🔄 reusa misma lógica
+      setPosts(sortByNewest(data));                 // 🔄 orden descendente
       setError(null);
     } catch (e) {
       setError((e as Error).message);

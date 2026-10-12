@@ -8,7 +8,7 @@ import { usePosts } from '../../hooks/usePosts';        // ✅ NUEVO
 
 export const Home = () => {
   const { user } = useAuth();                            // usuario logueado
-  const { posts, loading, error, addPost } = usePosts(); // ✅ NUEVO: trae del backend
+  const { posts, loading, error, addPost, removePost } = usePosts(); // ✅ NUEVO: trae del backend
 
   // Si no hay sesión, redirige al login
   if (!user) return <Navigate to="/login" replace />;
@@ -25,6 +25,7 @@ export const Home = () => {
         posts={posts}
         currentUser={user}
         onPostCreate={addPost}                            // ✅ usa el del hook
+        onDelete={removePost}
       />
 
       <RighSidebar />

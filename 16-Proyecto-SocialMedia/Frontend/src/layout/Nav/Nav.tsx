@@ -20,8 +20,8 @@ export const Nav = () => {
         <li>
           <NavLink to="/mypost">Mis publicaciones</NavLink>
           <ul className={styles.submenu}>
-            <li><a href="#publicadas">Crear</a></li>
-            <li><a href="#borradores">Ver mis publicaciones</a></li>
+            <li><a href="/mypost">Crear</a></li>
+            <li><a href="/mypost">Ver mis publicaciones</a></li>
           </ul>
         </li>
         <li>

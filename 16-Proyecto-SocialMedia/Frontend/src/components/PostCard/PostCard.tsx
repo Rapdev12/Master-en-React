@@ -1,18 +1,10 @@
 // components/PostCard/PostCard.tsx
-import type { Publication } from '../../types/index';
+import type { Publication, User } from '../../types/index';
 import styles from './PostCard.module.css';
 
-// ─────────────────────────────────────────────────────────────
-// URL base donde el backend sirve las imágenes.
-// El backend guarda "88eb4897-....jpeg" en /uploads y lo
-// expone vía express.static → se accede en /uploads/<nombre>
-// ─────────────────────────────────────────────────────────────
 const UPLOADS_URL = "http://localhost:3000/uploads/";
 
-// ─────────────────────────────────────────────────────────────
-// Helper: convierte el ISO del backend a algo legible.
-// "2026-09-18T23:14:36.289Z" → "18 sep 2026, 23:14"
-// ─────────────────────────────────────────────────────────────
+
 function formatDate(iso: string): string {
   const date = new Date(iso);
   return date.toLocaleDateString("es-ES", {
@@ -26,13 +18,25 @@ function formatDate(iso: string): string {
 
 interface PostCardProps {
   post: Publication;
+  currentUser?: User;                      // ✅ NUEVO
+  onDelete?: (id: string) => void;         // ✅ NUEVO
 }
 
-export const PostCard: React.FC<PostCardProps> = ({ post }) => {
-  // Fallback del avatar si el usuario no tiene imagen guardada
+export const PostCard: React.FC<PostCardProps> = ({
+  post,
+  currentUser,                             // ✅ NUEVO
+  onDelete,                                // ✅ NUEVO
+}) => {
+  // ✅ NUEVO: ¿el post es del usuario logueado?
+  //    Doble check porque en tus tipos `User._id` es opcional.
+  const isOwner =
+    !!currentUser?._id && post.user._id === currentUser._id;
+
+  // 🔄 se mantiene: fallback del avatar
   const avatarSrc = post.user.image
     ? `${UPLOADS_URL}${post.user.image}`
     : "https://via.placeholder.com/40";
+
 
   return (
     <article className={styles.card}>
@@ -95,6 +99,17 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
         <button type="button" className={styles.actionBtn}>
           🔄 Compartir
         </button>
+         {/* ✅ NUEVO: botón borrar, solo si el post es tuyo */}
+    {isOwner && (
+      <button
+        type="button"
+        className={`${styles.actionBtn} ${styles.deleteBtn}`}   // ✅ NUEVO
+        onClick={() => onDelete?.(post._id)}
+        aria-label="Eliminar publicación"
+      >
+        🗑️ Eliminar
+      </button>
+    )}
       </footer>
     </article>
   );

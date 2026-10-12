@@ -8,12 +8,14 @@ interface CenterFeedProps {
   posts: Publication[];
   currentUser?: User;                                    // 👈 restaurar la prop
   onPostCreate: (content: string, files?: File[]) => void;
+  onDelete?: (id: string) => void; 
 }
 
 export const CenterFeed: React.FC<CenterFeedProps> = ({
   posts,
   currentUser,                                           // 👈 y el destructuring
-  onPostCreate
+  onPostCreate,
+  onDelete,
 }) => {
   return (
     <main className={styles.centerColumn}>
@@ -21,8 +23,13 @@ export const CenterFeed: React.FC<CenterFeedProps> = ({
 
       <div className={styles.postsContainer}>
         <div className={styles.feed}>
-          {posts.map((post) => (
-            <PostCard key={post._id} post={post} />
+           {posts.map((post) => (
+            <PostCard
+              key={post._id}
+              post={post}
+              currentUser={currentUser}               // ✅ NUEVO
+              onDelete={onDelete}                     // ✅ NUEVO
+            />
           ))}
         </div>
       </div>

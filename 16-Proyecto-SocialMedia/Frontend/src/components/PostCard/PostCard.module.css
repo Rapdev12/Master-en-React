@@ -73,3 +73,12 @@
   background-color: #f8fafc;
   color: var(--bubble-blue);
 }
+
+/* ✅ NUEVO: botón borrar, mismo look pero en rojo */
+.deleteBtn {
+  color: #dc2626;
+  border-color: #fecaca;
+}
+.deleteBtn:hover {
+  background-color: #fef2f2;
+}
