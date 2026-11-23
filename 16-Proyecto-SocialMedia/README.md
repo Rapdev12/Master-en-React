@@ -1,3 +1,46 @@
+# 2 💻 Frontend Client | Social Media SPA
+
+A modern, high-performance Single Page Application (SPA) for the social media platform, built with **React 19**, **React Router v7**, and **Vite**. The client focuses on seamless user experience, strict type safety, and automatic render optimizations powered by the official **React Compiler**.
+
+## ✨ Key Features
+
+- **Session & Protected Routing:** Clean authentication flow handling JWT storage, persistent sessions, and route guards that redirect unauthenticated visitors to login/register views.
+- **Dynamic Feed & Publications:** Real-time general feed displaying posts, user avatars, and multi-image galleries (supporting up to 5 images per publication).
+- **Ownership-Aware Actions:** User interfaces dynamically enable/disable actions (edit, delete) based on resource ownership, matching backend security rules.
+- **Social Graph & Follow System:** Follow/unfollow buttons with real-time UI status updates, user profile previews, and follower/following counters.
+- **Profile & Avatar Management:** Dedicated profile views showing user activity, with an account settings interface to update user data and upload avatar images.
+- **React Compiler Optimization:** Eliminates manual memoization boilerplate (`useMemo`, `useCallback`) by leveraging `babel-plugin-react-compiler` for automated compile-time performance.
+
+## 🛠️ Tech Stack
+
+- **React 19:** Latest UI library leveraging next-generation component paradigms.
+- **React Router v7:** Modern client-side routing, nested layouts, and route guards.
+- **TypeScript:** Strict type contracts across all components, API utilities, and state.
+- **Vite:** Ultra-fast bundling, instant Hot Module Replacement (HMR), and optimized production builds.
+- **Babel & React Compiler (`babel-plugin-react-compiler`):** Automatic component memoization and granular re-render optimization.
+- **ESLint & TypeScript-ESLint:** Enforcing strict code standards, hooks linting, and best practices.
+- **pnpm:** Fast and disk space-efficient package manager.
+
+## 🗺️ Views & Routes
+
+| Route | Access | Description |
+| :--- | :--- | :--- |
+| `/login` | ❌ Public | User authentication by nickname and password |
+| `/register` | ❌ Public | New account registration form |
+| `/` or `/feed` | ✅ Private | General timeline showing recent publications from the community |
+| `/profile/:id` | ✅ Private | User profile page (bio, follower/following count, user's publications) |
+| `/publication/create` | ✅ Private | Create a new post with text and up to 5 image uploads |
+| `/people` | ✅ Private | Directory to explore users and manage follow relationships |
+
+> *Note: Adjust route paths according to your exact React Router structure.*
+
+## 📝 Scope & Technical Notes
+
+- **Zero-Config Environment:** No `.env` file is required for local setup; the client is pre-configured to communicate directly with the local backend running at `http://localhost:3000`.
+- **React Compiler Integration:** Integrated via `@rolldown/plugin-babel` and `@vitejs/plugin-react` to automatically optimize component renders at build/dev time without manual hooks.
+- **Form Data Handling:** File uploads (avatars and publication pictures) are packaged using browser `FormData` to ensure seamless multi-part communication with the backend's Multer pipeline.
+- **Lightweight Dependencies:** Clean project architecture focused on vanilla React hooks and browser primitives, avoiding heavy third-party UI or state management bloat.
+
 # 🌐 Api-Rest Red Social | Backend REST API
 
 A RESTful API for a social media platform, built as an advanced full-stack project focused on backend architecture: authentication, ownership-based authorization, file uploads and a strongly-typed, scalable structure.
@@ -162,3 +205,9 @@ This backend was built through a guided human-AI learning process with **Claude*
 
 - GitHub: [@Rapdev12](https://github.com/Rapdev12/Rapdev12)
 - LinkedIn: [Ronald Palacios](https://www.linkedin.com/in/ronald-palacios-311a6b155/)
+
+<details>
+  <summary>🔍 <b>Click here to view Certificate Preview</b></summary>
+  <br>
+  <img src="./asset/Certigicado.pdf" alt="Course Certificate" width="100%">
+</details>
