@@ -209,5 +209,5 @@ This backend was built through a guided human-AI learning process with **Claude*
 <details>
   <summary>🔍 <b>Click here to view Certificate Preview</b></summary>
   <br>
-  <img src="./asset/Certigicado.pdf" alt="Course Certificate" width="100%">
+  <img src="./Frontend/src/assets/Master%20en%20React.pdf" alt="Course Certificate" width="100%">
 </details>
