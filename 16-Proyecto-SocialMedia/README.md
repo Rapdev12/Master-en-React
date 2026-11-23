@@ -209,7 +209,7 @@ This backend was built through a guided human-AI learning process with **Claude*
 <details>
   <summary>🔍 <b>Click here to view Certificate Preview</b></summary>
   <br>
-  <img src="./Frontend/src/assets/img%20certificado.png" alt="Master en React Certificate" width="3%">
+  <img src="./Frontend/src/assets/img%20certificado.png" alt="Master en React Certificate" width="1%">
   <br><br>
   📄 <a href="./Frontend/src/assets/Master%20en%20React.pdf">View Official Certificate (PDF)</a>
 </details>
